@@ -51,8 +51,14 @@ const recursiveSum2 = (() => {
   return (collection) => innerRecursiveSum(collection, 0);
 })();
 
+const recursiveSum3 = ([head, ...tail]) => {
+  if (!tail.length) return head;
+  return head + recursiveSum3(tail);
+};
+
 console.log(recursiveSum1(numbers));
 console.log(recursiveSum2(numbers));
+console.log(recursiveSum3(numbers));
 
 
 // Map imperativo
