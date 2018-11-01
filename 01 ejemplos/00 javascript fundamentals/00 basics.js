@@ -129,7 +129,7 @@ console.log(false || true); // true
 console.log(false || false); // false
 
 // los operadores && y ||, cuando se usan con operandos no booleanos
-// pueden devolver un resultado no booleano
+// pueden devolver un resultado no booleano, cualquiera: array, objeto ...
 var a = 3 || 20; // 3. El 3 es el primer valor "truthy" que se encuentra el OR.
 var a = (3 || 20) // 3
 var a = 0 || 20 // 20. El 20 es el primer valor "truthy" que se encuentra el OR.
