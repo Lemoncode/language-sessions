@@ -70,9 +70,9 @@ console.log(i); // 3
 console.log(message); // "Someone says: let's go"
 
 // equivalente a:
-var collection = ["hey", "ho", "let's go"];
-var message = "No one says nothing";
-var i;
+var collection, message, i;
+collection = ["hey", "ho", "let's go"];
+message = "No one says nothing";
 for (i = 0; i < collection.length; i++) {
   message = "Someone says: " + collection[i];
   console.log(message); // "Someome says: hey"
@@ -94,7 +94,8 @@ function printSomething() {
 printSomething();
 
 // esto es equivalente a:
-var n = 1;
+var n;
+n = 1;
 
 function printSomething() {
   var n;
