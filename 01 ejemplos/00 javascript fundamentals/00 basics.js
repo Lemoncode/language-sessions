@@ -50,7 +50,8 @@ function main(arg) {
   return arg;
 }
 
-// [!] Los objetos y los arrays se darán en el siguiente capítulo
+// object
+// [!] Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo
 
 
 
@@ -137,7 +138,7 @@ var a = Boolean(0 || 20) // true
 var a = 3 && 20; // 20
 var a = (3 && 20) // 20
 var a = 0 && 20; // 0
-var a = Boolean(0 && 20) // true
+var a = Boolean(0 && 20) // false
 var a = 2 > 0 && "hello" // "hello"
 var a = 2 < 0 && "hello" // false
 

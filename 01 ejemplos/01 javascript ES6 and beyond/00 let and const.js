@@ -4,6 +4,8 @@
 // variables. Presentan una notable diferencia con respecto a "var",
 // y es que tienen ámbito de bloque ("block scope") por lo tanto 
 // se redefinen dentro de bloques tales como "if/else" o bucles "for".
+// Mientras que "var" tenía ámbito de función (contexto de ejecución)
+// ahora con "let" y "const" el ámbito es de bloque.
 // Esto tiene una implicación: el "hoisting" tampoco es aplicado a 
 // variables declaradas con "let" o "const".
 // ¿Cuál es la diferencia entre ellas? "let" está pensado para valores
