@@ -1,17 +1,28 @@
 ///-- Modelo Prototípico *******************************************************
 
 // JS no proporciona un modelo o implementación de clases en si mismo, sino que es
-// un lenguaje dinámico, basado en objetos (entendiendo los objetos como instancias). 
-// Todo son objetos en JS, hasta las funciones. Y aunque veamos más adelante que existe
-// la palabra reservada "class", esto no es más que azúcar sintáctico. Las clases
-// como tales, entendidas de la forma clásica, no existen en JS.
-// Sin embargo, podemos simular un comportamiento parecido a una clase gracias a una
-// propiedad llamada "prototipo".
+// un lenguaje dinámico, basado en objetos, es decir, instancias en memoria.
 
-// Antes de adentrarnos en el prototipo de un objeto, veamos como crear un objeto 
-// de un tipo especifico, definido por nosotros mismos. Ya conocemos los tipos
-// primitivos que nos ofrece JS, pero también podemos hacer los nuestros. 
-// Para ello necesitamos una función que llamaremos constructora, y un operador new:
+// Un ejemplo típico para explicar lo que es una clase versus un objeto es 
+// el caso de un plano versus una casa. El plano es la representación de una
+// posible casa, pero no existe como tal, es sólo un papel. La casa, por su parte
+// sería la instancia, la materialización del plano hecho realidad. Podremos
+// obtener tantas casas queramos a partir de un plano.
+
+// Pues bien, en JS todo son objetos, es decir, casas. No existen los planos,
+// las clases. Hasta las funciones son objetos!. Y aunque existe la palabra
+// reservada "class", esto no es más que azúcar sintáctico. Las clases
+// como tales, entendidas de la forma clásica, no existen en JS, sino que
+// se simula un comportamiento parecido al de una clase gracias a una propiedad
+// llamada "prototipo".
+
+// Antes de adentrarnos en el concepto de prototipo, volviendo al ejemplo de
+// plano vs casas, todo sistema de clases tiene un mecanismo para poder crear
+// "casas a partir de planos", es decir, instancias de clase. Veamos en JS
+// como simular este comportamiento y crear un objeto de un tipo especifico,
+// que definimos nosotros mismos. Ya conocemos los tipos primitivos que nos
+// ofrece JS, pero también podemos hacer los nuestros. Para ello necesitamos
+// una función que llamaremos constructora, y un operador new:
 
 // función constructora
 function Person(name) {
@@ -25,6 +36,8 @@ console.log(dan); // Person {name: "Dan"}
 console.log(james); // Person {name: "James"}
 // "new" lo que hace por debajo es crear un objeto nuevo y hacer que ese objeto
 // invoque a la función constructora, que el objeto llame al constructor.
+// Además "new", tiene una particularidad, hace algo más, y ahi entra en juego
+// el prototipo, pero eso lo veremos un poco más adelante. 
 
 // Podemos acceder a sus propiedades ("private", "protected" son conceptos que no
 // existen en JS)
@@ -74,6 +87,24 @@ var dan = new Person("Dan");
 var james = new Person("James");
 dan.greet(); // "Hello, I'm Dan"
 james.greet(); // "Hello, I'm James"
+
+// Como vemos, tanto "dan" como "james" son 2 objetos con el mismo prototipo, puesto que
+// han sido creados a partir de la misma función constructora. De dicho prototipo obtienen
+// la propiedad "greet" que ahora si, es una función única, que existe una única vez.
+// ¿Donde? En el objeto prototipo (el prototipo es un objeto también, todo son objetos en JS!).
+
+// El vínculo entre un objeto y su prototipo lo establece el operador "new", es la pieza que
+// nos faltaba. Entre bambalinas, su tercera misión es vincularle el prototipo de la función
+// constructora. Es una manera de decirle, "como has sido creado por Person, tu tienes el
+// prototipo de Person".
+
+// Con el new generamos un objeto vacío, que invoca al constructor, y acaba asignandole
+// el prototipo adecuado:
+// new => {name: "Dan", __proto__: Person.prototype}
+
+console.log(Person.prototype);              // Es el mismo objeto
+console.log(Object.getPrototypeOf(dan));    // Es el mismo objeto
+console.log(Person.prototype === Object.getPrototypeOf(dan)); // true
 console.log(dan instanceof Person); // true
 
 
@@ -104,14 +135,17 @@ Automobile.prototype.printKms = function() {
 
 
 // A continuación creamos otro objeto algo más específico, un Taxi. Vamos a hacer que
-// Taxi "herede" de Automobile.
+// Taxi "herede" de Automobile. Para eso, queremos que el objeto que llama al constructor
+// Taxi() invoque también al constructor Automobile().
 function Taxi() {
   Automobile.call(this, 4); // super();
   this.isOccupied = false;
 }
 
-// Hacemos que Taxi "herede" de Automobile
-Taxi.prototype = Object.create(Automobile.prototype);
+// Hacemos que Taxi "herede" de Automobile. Para ello creamos un prototipo para Taxi,
+// gracias a Object.creat que crea un nuevo objeto cuyo prototipo podemos hacer que apunte
+// a donde queramos.
+Taxi.prototype = Object.create(Automobile.prototype); // Crea un objeto nuevo {__proto__: arg} 
 Taxi.prototype.constructor = Taxi;
 
 // Añadimos también algún método a Taxi.
@@ -122,7 +156,7 @@ Taxi.prototype.moveSomeone = function() {
 // super.run(): este método se sirve de otro que está más arriba en la cadena de prototipos.
 Taxi.prototype.run = function(kms) {
   Automobile.prototype.run.call(this, kms);
-  var movingMessage = this.isOccupied ? "moving someone" : "not moving no one";
+  var movingMessage = this.isOccupied ? "moving someone" : "not moving anyone";
   console.log("And I'm " + movingMessage);
 };
 
@@ -149,6 +183,8 @@ console.log(taxi instanceof Automobile); // true
 console.log(taxi instanceof Object); // true
 // Cadena Prototípica
 // Taxi -----> Automobile -----> Object -----> null
+
+
 
 //-- CREACIÓN DE OBJETOS Y SU CADENA DE PROTOTIPOS **************
 
