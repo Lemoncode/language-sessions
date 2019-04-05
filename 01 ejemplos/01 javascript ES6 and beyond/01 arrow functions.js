@@ -27,8 +27,7 @@ const toObject = (name, surname, age) => {
 const toObject = (name, surname, age) => ({ name, surname, age })
 
 
-// Al igual que las funciones anónimas que utilizan la palabra reservada "function",
-// las "fat arrow" o "lambdas" puede utilizarse como si de un objeto se tratara, y 
+// Las "fat arrow" o "lambdas" puede utilizarse como si de un objeto se tratara, y 
 // puede ser pasadas como argumentos de otra función, o devueltas como valor de retorno.
 function createCounter() {
   let i = 0;
@@ -114,10 +113,10 @@ function ClassRoom(title, students) {
 ClassRoom.prototype.showStudents = function () {
   const self = this;
   this.students.forEach(function (student) {
-    // We have a problem here because "this" is now "students"
-    console.log(self.title + ": " + student); // "undefined: Student 1"
-  });                                         // "undefined: Student 2"
-};                                            // "undefined: Student 3"
+    // Ahora tenemos a self que representa al "this" correcto
+    console.log(self.title + ": " + student); // "2nd Primary: Student 1"
+  });                                         // "2nd Primary: Student 2"
+};                                            // "2nd Primary: Student 3"
 
 const secondPrimary = new ClassRoom("2nd Primary", ["Student 1", "Student 2", "Student 3"]);
 secondPrimary.showStudents();

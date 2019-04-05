@@ -143,10 +143,12 @@ function Taxi() {
 }
 
 // Hacemos que Taxi "herede" de Automobile. Para ello creamos un prototipo para Taxi,
-// gracias a Object.creat que crea un nuevo objeto cuyo prototipo podemos hacer que apunte
-// a donde queramos.
+// gracias a Object.create que crea un nuevo objeto cuyo prototipo podemos hacer que apunte
+// a donde queramos. Ademas hay que setear su constructor.
 Taxi.prototype = Object.create(Automobile.prototype); // Crea un objeto nuevo {__proto__: arg} 
 Taxi.prototype.constructor = Taxi;
+// Una forma equivalente sería directamente apuntando a donde queramos
+// Taxi.prototype.__proto__ = Automobile.prototype;
 
 // Añadimos también algún método a Taxi.
 Taxi.prototype.moveSomeone = function() {

@@ -36,7 +36,7 @@ for (const i = 0; i < 10; i++) { // Uncaught TypeError: Assignment to constant v
   console.log(i);
 }
 
-// Debemos aclara, sin embargo, que no es lo mismo reasignar que mutar. "const" no es
+// Debemos aclarar, sin embargo, que no es lo mismo reasignar que mutar. "const" no es
 // reasignable (no podemos cambiar la referencia a la que apunta una vez declarada) pero
 // en caso de que el contendio de la variable sea un objeto, si que podemos mutar sus
 // propiedades o métodos, sin que esto viole su característica de no-reasignable, puesto

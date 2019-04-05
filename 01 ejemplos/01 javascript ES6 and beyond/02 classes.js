@@ -91,6 +91,7 @@ class Automobile {
     this.kms = 0;
   }
 
+  // Estos métodos se añadirán al objeto Automobile.prototype.
   run(kms) {
     this.kms += kms;
     console.log("I'm running " + kms + "kms");
@@ -107,7 +108,7 @@ class Taxi extends Automobile {
     this.isOccupied = false;
   }
 
-  // These methods will be added to Taxi.prototype object
+  // Estos métodos se añadirán al objeto Taxi.prototype.
   moveSomeone() {
     this.isOccupied = true;
   };
@@ -130,7 +131,9 @@ taxi.moveSomeone();
 console.log(taxi.isOccupied); // true
 
 // Las clases también pueden ser anónimas, al igual que las funciones.
-// Veamos un ejemplo de factoría de clases.
+// Veamos un ejemplo de FACTORÍA DE CLASES.
+// Aqui estamos usando el concepto de CLOSURE para 'recordar' el mensaje
+// y crear clases especializadas (distintas) con distinto mensaje.
 function makeClass(message) {
   return class {
     talk() {

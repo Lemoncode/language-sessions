@@ -1,7 +1,7 @@
 ///-- DESTRUCTURING *******************************************************
 
 // Destructuring es una técnica rápida para asignar propiedades de objetos a
-// nombres de variables.
+// variables, o items de un array a variables.
 
 
 // "DESTRUCTURING" SOBRE OBJETOS
