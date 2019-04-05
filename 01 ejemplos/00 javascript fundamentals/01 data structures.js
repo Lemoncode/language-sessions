@@ -49,9 +49,9 @@ console.log(person.lastname); // undefined
 delete person.country.id;
 console.log(person.country); // { name: "Spain" }
 
-// comparando objetos
+// [!] comparando objetos
 var boy = { age: 15 };
-console.log(boy === { age: 15 }); // false
+console.log(boy === { age: 15 }); // [!!!] false. Se comparan REFERENCIAS, no contenido.
 console.log(boy === boy); // true
 console.log(boy.toString()); // [object Object]
 
@@ -107,7 +107,7 @@ for (var i = 0; i < collection.length; i++) {
 var collection = [3];
 console.log(collection === collection); // true
 console.log(collection === [3]); // false. Different object.
-console.log([] == ''); // true (type coertion)
+console.log([] == ''); // true (type coertion). [].toString() => "" == ''
 
 
 ///-- Constructores por defecto *******************************************************

@@ -183,8 +183,17 @@ console.log(taxi.isOccupied); // true
 console.log(taxi instanceof Taxi); // true
 console.log(taxi instanceof Automobile); // true
 console.log(taxi instanceof Object); // true
-// Cadena Prototípica
+// Herencia
 // Taxi -----> Automobile -----> Object -----> null
+// Cadena Prototípica
+/**
+ * Taxi.prototype 
+ * Taxi.prototype._proto_ ----> Automobile.prototype
+ *                              Automobile.prototype._proto_ -----> Object.prototype
+ *                                                                  Object.prototype._proto_: -----> null
+ */
+
+
 
 
 
@@ -230,42 +239,37 @@ sayAge(); // I'm undefined years old.
 // global, es decir, el objeto "window".
 
 // Por tanto si hago esto, la cosa cambia:
-age = 35; // equivalente a window.age = 35.
+age = 25; // equivalente a window.age = 25.
 function sayAge() {
   console.log("I'm " + this.age + " years old");
 }
-sayAge(); // I'm 35 years old.
+sayAge(); // I'm 25 years old.
 // Hemos creado una propiedad age al objeto global window.
 // window es el que llama a sayAge(), y como this apunta 
 // al que llama (caller), ahora si funciona.
 
-// Veamos ahora con constructores.
-function Person(name, age) {
-  this.name = name;
-  this.age = age;
+// De forma equivalente:
+const me = {
+  name: "Javi",
+  age: "36",
 }
-// Person no tiene método sayAge, pero puedo hacer que dan
-// llame a sayAge. JS es pura manteca.
-var dan = new Person("Dan", 26);
-sayAge.call(dan); // "I'm 26 years old"
-// Como sayAge ha sido llamado por dan y dan si tiene propiedad
-// "age", ha funcionado correctamente.
+sayAge.call(me);  // I'm 36 years old.
 
 // Lo que podemos hacer es atar el contexto de la función a quien
-// queramos, por ejemplo a dan:
-var sayAgeDan = sayAge.bind(dan);
-sayAgeDan(); // "I'm 26 years old"
+// queramos, por ejemplo a 'me':
+var sayMyAge = sayAge.bind(me);
+sayMyAge(); // "I'm 36 years old"
 
-// Instancias anonimas (alias object literal)
-var dan = {
-  name: "Dan",
-  age: 26,
+// O como Instancias anonimas (alias object literal)
+var me = {
+  name: "Javi",
+  age: 36,
   sayAge: function() {
     console.log("I'm " + this.age + " years old");
   },
 };
 
-console.log(dan.sayAge()); // "I'm 26 years old"
+console.log(me.sayAge()); // "I'm 36 years old"
 
 
 ///-- GETTERS & SETTERS *******************************************************
@@ -277,13 +281,14 @@ var book = {
 
 console.log(book.author); // "Edward"
 
-// Pero también podemos crearlas a partir de "accessors" get/set
+// Pero también podemos crearlas a partir de "accessors" get/set.
+// Con ello se tiene más control sobre la propiedad, que queda como privada.
 var book = {
   get author() {
     return "I'm " + this._author; // Bucle infinto si llamamos a "this.author"
   },
   set author(newAuthor) {
-    if (newAuthor !== "Alan") {
+    if (newAuthor !== "Alan") {  // Bloqueo a Alan.
       this._author = newAuthor; // Same here.
     }
   },

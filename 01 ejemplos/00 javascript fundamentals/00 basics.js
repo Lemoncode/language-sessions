@@ -66,10 +66,21 @@ console.log(9 / 3); // 3
 console.log(15 / 2); // 7.5;
 console.log(15 % 3); // 0
 
-// "falsy values". Valores de distintos tipos que se evalúan como falso:
+// [copy-paste version]
+console.log(52 + 21);
+console.log("hello " + "world")
+console.log(10 - 5);
+console.log(10 * 10);
+console.log(9 / 3);
+console.log(15 / 2);
+console.log(15 % 3);
+
+// En JavaScript podemos evaluar valores de distintios tipos como
+// booleanos, y nos interesa conocer cuales se evaluarán a true y a false.
+// Los que se evaluan a false, se les llama "falsy values":
 0
-false
 NaN
+false
 ""
 null
 undefined
@@ -90,12 +101,23 @@ console.log(num); // 30
 num /= 2; // Equivalent to num = num / 2
 console.log(num); // 15
 
-// COMPARACIONES y "type coertion"
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
+// [copy paste version]
+var num = 3;
+console.log(num++);
+console.log(num--);
+console.log(++num);
+console.log(--num);
+num += 5;
+console.log(num);
+num -= 5;
+console.log(num);
+num *= 10;
+console.log(num);
+num /= 2;
+console.log(num);
 
-// Puesto que JS no es un lenguaje tipado, se puede comparar miembros de distinta naturaleza (distinto tipo). En tal
-// caso, la estrategia que sigue JS es convertir uno de los miembros o los dos a un tipo común para poder realizar la
-// comparativa. A esto se le llama "type coertion".
+
+// COMPARACIONES
 console.log(3 > 0); // true
 console.log(3 < 0); // false
 console.log(3 > 3); // false
@@ -103,17 +125,32 @@ console.log(3 < 3); // false
 console.log(3 >= 3); // true
 console.log(3 <= 3); // true
 console.log(5 == 5); // true
-// Explicar Type Coertion ahora.
-console.log(5 == '5'); // true // Loose equality. Igualdad débil.
-console.log(5 === 5); // true // Strict equality. Igualdad fuerte.
-console.log(5 === '5'); // false
+
+// "TYPE COERTION"
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
+// Puesto que JS no es un lenguaje tipado, se puede comparar miembros de distinta naturaleza (distinto tipo). En tal
+// caso, la estrategia que sigue JS es convertir uno de los miembros o los dos a un tipo común para poder realizar la
+// comparativa. A esto se le llama "type coertion".
+console.log(5 == '5'); // true // [!] Loose equality. Igualdad débil.
+console.log(5 === '5'); // false // [!] Strict equality. Igualdad fuerte.
 console.log(5 != 5); // false
 console.log(5 != '5'); // false
 console.log(5 !== 5); // false
 console.log(5 !== '5'); // true
-console.log(0 == false); // true
-console.log(0 === false); // false
-console.log(true + false); // 1
+console.log(0 == false); // true. (falsy == falsy)
+console.log(0 === false); // false. (number != boolean)
+console.log(true + false); // 1. (1 + 0)
+
+// [copy paste version]
+console.log(5 == '5');
+console.log(5 === '5'); 
+console.log(5 != 5); 
+console.log(5 != '5'); 
+console.log(5 !== 5); 
+console.log(5 !== '5'); 
+console.log(0 == false); 
+console.log(0 === false); 
+console.log(true + false);
 
 // Operadores LÓGICOS
 
@@ -129,18 +166,32 @@ console.log(true || false); // true
 console.log(false || true); // true
 console.log(false || false); // false
 
-// los operadores && y ||, cuando se usan con operandos no booleanos
+// OJO. De nuevo, JS puede tener operandos de distinta naturaleza.
+// Los operadores && y ||, cuando se usan con operandos no booleanos
 // pueden devolver un resultado no booleano, cualquiera: array, objeto ...
 var a = 3 || 20; // 3. El 3 es el primer valor "truthy" que se encuentra el OR.
-var a = (3 || 20) // 3
-var a = 0 || 20 // 20. El 20 es el primer valor "truthy" que se encuentra el OR.
-var a = Boolean(0 || 20) // true
+var a = (3 || 20); // 3
+var a = 0 || 20; // 20. El 20 es el primer valor "truthy" que se encuentra el OR.
+var a = Boolean(0 || 20); // true
 var a = 3 && 20; // 20
-var a = (3 && 20) // 20
+var a = (3 && 20); // 20
 var a = 0 && 20; // 0
-var a = Boolean(0 && 20) // false
-var a = 2 > 0 && "hello" // "hello"
-var a = 2 < 0 && "hello" // false
+var a = Boolean(0 && 20); // false
+var a = 2 > 0 && "hello"; // "hello"
+var a = 2 < 0 && "hello"; // false
+
+// [copy paste version]
+var a = 3 || 20;
+var a = (3 || 20);
+var a = 0 || 20;
+var a = Boolean(0 || 20);
+var a = 3 && 20;
+var a = (3 && 20);
+var a = 0 && 20;
+var a = Boolean(0 && 20);
+var a = 2 > 0 && "hello";
+var a = 2 < 0 && "hello";
+
 
 
 
@@ -219,11 +270,11 @@ switch (animal) {
 
 
 // operador ternario
-var age = 18;
-var status = (age > 18) ? 'adult' : 'minor';
+var age = 20;
+var status = (age >= 18) ? 'adult' : 'minor';
 
 // operador ternario sin paréntesis, no necesario
-var status = age > 18 ? 'adult' : 'minor';
+var status = age >= 18 ? 'adult' : 'minor';
 
 // anidamiento de ternarios "ternary nesting"
 var year = 2018;
