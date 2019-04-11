@@ -1,7 +1,7 @@
 ///-- DEFAULT ARGUMENTS *******************************************************
 
 // A partir de ES6 podemos asignar valores por defecto a los argumentos de una función:
-const greet = (name = "Unknown") => `Hello, ${name}`;
+const greet = (name = "Unknown") => "Hello, " + name;
 
 console.log(greet()); // "Hello, Unknown"
 console.log(greet("Jake")); // "Hello, Jake"

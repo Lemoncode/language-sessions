@@ -64,7 +64,7 @@ f(); // undefined
 
 // A menos que me cree una propiedad "age" en el contexto global "window":
 age = 35;
-f();
+f(); // 35
 
 // Una arrow function no tiene contexto como tal sino que lo toma de donde
 // ha sido definida.
