@@ -1,12 +1,10 @@
 ///-- TEMPLATE LITERAL *******************************************************
 
 // A partir de ES6 podemos usar los backticks para escribir strings:
-
 const message = `Hello`;
 console.log(message); // "Hello"
 
 // Una ventaja que ofrecen es poder crear strings multilinea sin concatenación:
-
 const riddle = `Sobre las oscuras sombras
 del antiguo bastión,
 el alto centinela cuadrado callado ve
@@ -27,7 +25,7 @@ console.log(message); // "How are you, Edward?"
 const formatMessage = (product, quantity) =>
   `You have ${quantity} ${product}${quantity === 1 ? '' : 's'} in the shopping cart`;
 
-  console.log(formatMessage("egg", 3)); // "You have 3 eggs in the shopping cart"
+console.log(formatMessage("egg", 3)); // "You have 3 eggs in the shopping cart"
 console.log(formatMessage("egg", 1)); // "You have 1 egg in the shopping cart"
 
 // Una forma avanzada de utilizar los template literals es para modificar el resultado de la plantilla mediante una función:
@@ -65,10 +63,11 @@ console.log(article);
 
 
 // Alternativa al ejemplo anterior:
-
 const acuario = ["Acuario", "fantástica", "el amor llama a tu puerta"];
 const leo = ["Leo", "un mojón", "tu código es horrible"];
 
+// [!] OJO, aqui el argumento phrases no corresponde a las frases de cada
+// línea sino a los chunks de texto entre placeholders.
 const templateFactory = (phrases, ...placeholders) => {
   return data => 
     phrases.map((phrase, index) => phrase + (data[placeholders[index]] || "")).join('');

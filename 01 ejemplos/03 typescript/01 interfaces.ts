@@ -37,7 +37,7 @@ const car: Car = {
 // Podemos utilizar interfaces como tipos dentro de otras inferfaces:
 interface Address {
   zipCode: number;
-  locality: string;
+  city: string;
   street: string;
 }
 
@@ -48,7 +48,7 @@ interface Citizen {
 
 const citizen: Citizen = {
   address: {
-    locality: 'Málaga',
+    city: 'Málaga',
     street: 'Héroes de Sostoa',
     zipCode: 29002,
   },

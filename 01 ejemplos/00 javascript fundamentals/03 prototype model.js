@@ -221,9 +221,9 @@ var me = new Person("Javi");
 // "sayName" sin embargo, se obtiene heredado del prototipo (se accede, no se copia).
 
 // 3. Object.create()
-a = {name: "a"};        // a -----> Object.prototype -----> null.
-b = Object.create(a);   // b -----> a -----> Object.prototype -----> null.
-c = Object.create(b);   // c -----> b -----> a -----> Object.prototype -----> null.
+var a = {name: "a"};        // a -----> Object.prototype -----> null.
+var b = Object.create(a);   // b -----> a -----> Object.prototype -----> null.
+var c = Object.create(b);   // c -----> b -----> a -----> Object.prototype -----> null.
 
 
 //-- THIS *******************************************************

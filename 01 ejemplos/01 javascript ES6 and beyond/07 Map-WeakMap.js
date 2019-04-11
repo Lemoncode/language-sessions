@@ -15,7 +15,6 @@ console.log(map.get("val")); // 31;
 
 // Hay una diferencia importante entre Map y un objeto literal y es que una instancia
 // de Map puede utilizar no sólo strings como claves:
-
 const map = new Map();
 map.set(3.1415, "número π");
 

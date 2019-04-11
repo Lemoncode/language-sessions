@@ -83,7 +83,7 @@ const original = {
   },
 };
 
-const copy = [...original];
+const copy = {...original};
 console.log(copy.country); // {id: 21,name: "Spain",iso3: "SPA"}
 console.log(original.country === copy.country); // true
 

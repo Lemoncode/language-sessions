@@ -2,7 +2,7 @@
 
 // Para anotar tipos con Typescript usamos los puntos (:), como si del valor
 // de una propiedad se tratase. Asi pues, para tipar una variable, añadimos
-// su anotación de tipo a continaución del nombre de la variable:
+// su anotación de tipo a continuación del nombre de la variable:
 const city: string = "Málaga";
 const num: number = 3;
 
