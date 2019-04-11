@@ -4,66 +4,63 @@
 // de los argumentos que recibe y el tipo de dato que devuelve.
 // Es importante tener en cuenta que el número de argumentos que 
 // especifiquemos son obligatorios.
-function toUpperWithReverse(value: string, reverse: boolean): string {
-  const uppercased = value.toUpperCase();
-  return reverse ?
-    uppercased.split('').reverse().join('') :
-    uppercased;
+function shout(text: string, upperCase: boolean): string {
+  return (upperCase ? text.toUpperCase() : text) + "!!!";
 }
 
-const res1 = toUpperWithReverse("secured arguments"); // [ts] Expected 2 arguments, but got 1
-const res2 = toUpperWithReverse("secured arguments", false); // [ts] Expected 2 arguments, but got 1
-console.log(res2); // "SECURED ARGUMENTS"
+const t1 = shout("hi"); // [ts] Expected 2 arguments, but got 1
+const t2 = shout("hi", true);
+console.log(t2); // "HI!!!"
 
 // Su homólogo en arrow function
-const toUpperWithReverseArrow = (value: string, reverse: boolean): string => {
-  const uppercased = value.toUpperCase();
-  return reverse ?
-    uppercased.split('').reverse().join('') :
-    uppercased;
-};
+const shout = (text: string, upperCase: boolean): string =>
+  (upperCase ? text.toUpperCase() : text) + "!!!";
 
-const res3 = toUpperWithReverseArrow("secured arguments"); // [ts] Expected 2 arguments, but got 1
-const res4 = toUpperWithReverseArrow("secured arguments", true); // [ts] Expected 2 arguments, but got 1
-console.log(res4); // "STNEMUGRA DERUCES"
+const t3 = shout("hi"); // [ts] Expected 2 arguments, but got 1
+const t4 = shout("hi", false);
+console.log(t4); // "hi!!"
 
 // Utilizando el operador [?] sobre un argumento significa que dicho
 // argumento es opcional a la hora de invocar a la función
-const addQuantity = (base: number, extra: number, offset?: number) =>
-  offset ?
-    (base + extra) * offset :
-    base + extra;
-
-const res5 = addQuantity(52, 29); // 81
-const res6 = addQuantity(112, 35, 0.3); // 29.4
+const shout = (text: string, upperCase?: boolean): string =>
+  (upperCase ? text.toUpperCase() : text) + "!!!";
 
 // Si no pasamos explícitamente un argumento opcional su valor es, 
 // al igual que en JavaScript, undefined.
-const concatStrings = (text: string, other?: string): string => text + other;
-const res7 = concatStrings("Here is "); // "Here is undefined"
+console.log(shout("hi")); // "hi!!!" ---> upperCase = undefined.
 
 // También es posible declarar el tipo de valores por defecto, aunque
 // por lo general es más legible el no declarar el tipo y dejar que 
 // TypeScript lo infiera.
-// [!] No se puede mezclar el operador opcional con valores por defecto aunque al inspeccionar el tipo ya es opcional
-const secureConcatStrings = (text: string, other: string = "Johny") => text + other;
-const res8 = secureConcatStrings("Here is "); // "Here is Johny"
+// [!] No se puede mezclar el operador opcional con valores por defecto
+// aunque al inspeccionar el tipo ya es opcional
+const shout = (text: string, upperCase: boolean = true): string =>
+  (upperCase ? text.toUpperCase() : text) + "!!!";
+
+console.log(shout("hi")); // "HI!!!"
 
 // También podemos utilizar el operador type para
 // declarar el tipo de una función anónima (esto se conoce como 
 // ALIAS y lo veremos un poco más adelante):
-type stringMapper = (value: string) => string;
-const toLower: stringMapper = (value) => value.toLowerCase();
-console.log(toLower("ArrowFunction using TYPE")); // "arrowfunction using type"
+type ShoutFunction = (text: string, upperCase: boolean) => string;
+const shout: ShoutFunction = (text, upperCase) =>
+  (upperCase ? text.toUpperCase() : text) + "!!!";
+
+console.log(shout("TS rocks", true));
 
 // También es posible tipar argumentos que son funciones:
-function squareAndPass(value: number, callback: (v: number) => string): number {
-  const valueAfterCallback = callback(value * value);
-  return valueAfterCallback.length / 2;
-}
+const shout = (text: string, getNumExclamation: () => number): string =>
+  text.toUpperCase() + "!".repeat(getNumExclamation());
 
-const repeatV = (length) => Array.from({ length }, () => 'V').join('');
-console.log(squareAndPass(4, repeatV)); // 8
+const getRandom = () => (Math.random() * 10) + 1; // Este es mi callback.
+
+console.log(shout("WoW", getRandom));
+console.log(shout("WoW", getRandom));
+console.log(shout("WoW", getRandom));
+console.log(shout("WoW", getRandom));
+console.log(shout("WoW", getRandom));
+console.log(shout("WoW", getRandom));
+
 
 // Sobrecarga de funciones (mismos nº argumentos, diferente tipo)
 function switchType(c: string): number;

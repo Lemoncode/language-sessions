@@ -93,12 +93,13 @@ const z1 = new Undead('brains');
 
 
 // -- STATIC PROPERTIES
-// Podemos añadir propiedades estáticas mediante el operador "static"
+// Podemos añadir propiedades estáticas mediante el operador "static".
 class Demon extends Undead {
   static readonly weakness = 'Cross';
 }
 
 const demon1 = new Demon('soul');
+// A una propiedad estática se accede a través de la clase y no de la instancia.
 console.log(Demon.weakness); // "Cross"
 demon1.weakness; // [ts] Property 'weakness' is a static member of type 'Demon'
 
