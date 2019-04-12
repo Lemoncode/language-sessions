@@ -26,7 +26,7 @@ const res2 = firstArrow<null>([null, null]); // res2 es de tipo string
 
 // Hay casos donde TypeScript es lo suficientemente listo como para
 // inferir el tipo basándonos en el argumento
-const res3 = first([1, 2, 3, 4, 5]); // res3 es un string
+const res3 = first([1, 2, 3, 4, 5]); // res3 es un number
 const res4 = firstArrow([false, "0", true, "1"]); // res4 es un string o un boolean
 
 // El tipo de estas funciones genéricas en si mismas se expresaría
