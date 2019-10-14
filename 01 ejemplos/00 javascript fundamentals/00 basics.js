@@ -20,6 +20,9 @@ var a = 5;
 
 ///-- TIPOS DE DATOS *******************************************************
 
+
+// PRIMITIVOS
+
 // string
 "hello world" // dobles comillas
 'hello world' // comillas simples
@@ -44,7 +47,12 @@ null
 // undefined
 undefined
 
-// funciones
+// symbol
+// [!] Lo veremos en más adelante en el apartado ES6
+
+// OBJETOS
+
+// funciones (Son un tipo especial de objetos en JS)
 function main(arg) {
   console.log(arg);
   return arg;
@@ -57,9 +65,9 @@ function main(arg) {
 
 ///-- OPERADORES *******************************************************
 
-// Operadores ARITMÉTICOS
+// 1. Operadores ARITMÉTICOS
 console.log(52 + 21); // 73
-console.log("hello " + "world") // "hello world"
+console.log("hello " + "world"); // "hello world"
 console.log(10 - 5); // 5
 console.log(10 * 10); // 100;
 console.log(9 / 3); // 3
@@ -68,23 +76,12 @@ console.log(15 % 3); // 0
 
 // [copy-paste version]
 console.log(52 + 21);
-console.log("hello " + "world")
+console.log("hello " + "world");
 console.log(10 - 5);
 console.log(10 * 10);
 console.log(9 / 3);
 console.log(15 / 2);
 console.log(15 % 3);
-
-// En JavaScript podemos evaluar valores de distintios tipos como
-// booleanos, y nos interesa conocer cuales se evaluarán a true y a false.
-// Los que se evaluan a false, se les llama "falsy values":
-0
-NaN
-false
-""
-null
-undefined
-// el resto serán evaluados como "truthy values"
 
 // Asignaciones con operadores aritméticos
 var num = 3;
@@ -116,8 +113,7 @@ console.log(num);
 num /= 2;
 console.log(num);
 
-
-// COMPARACIONES
+// 2. COMPARACIONES
 console.log(3 > 0); // true
 console.log(3 < 0); // false
 console.log(3 > 3); // false
@@ -126,41 +122,52 @@ console.log(3 >= 3); // true
 console.log(3 <= 3); // true
 console.log(5 == 5); // true
 
+// En JavaScript podemos evaluar valores de distintios tipos como
+// booleanos, y nos interesa conocer cuales se evaluarán a true y a false.
+// Los que se evaluan a false, se les llama "falsy values":
+0;
+NaN;
+false;
+("");
+null;
+undefined;
+// el resto serán evaluados como "truthy values"
+
 // "TYPE COERTION"
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
 // Puesto que JS no es un lenguaje tipado, se puede comparar miembros de distinta naturaleza (distinto tipo). En tal
 // caso, la estrategia que sigue JS es convertir uno de los miembros o los dos a un tipo común para poder realizar la
 // comparativa. A esto se le llama "type coertion".
-console.log(5 == '5'); // true // [!] Loose equality. Igualdad débil.
-console.log(5 === '5'); // false // [!] Strict equality. Igualdad fuerte.
+console.log(5 == "5"); // true // [!] Loose equality. Igualdad débil.
+console.log(5 === "5"); // false // [!] Strict equality. Igualdad fuerte.
 console.log(5 != 5); // false
-console.log(5 != '5'); // false
+console.log(5 != "5"); // false
 console.log(5 !== 5); // false
-console.log(5 !== '5'); // true
+console.log(5 !== "5"); // true
 console.log(0 == false); // true. (falsy == falsy)
 console.log(0 === false); // false. (number != boolean)
 console.log(true + false); // 1. (1 + 0)
 
 // [copy paste version]
-console.log(5 == '5');
-console.log(5 === '5'); 
-console.log(5 != 5); 
-console.log(5 != '5'); 
-console.log(5 !== 5); 
-console.log(5 !== '5'); 
-console.log(0 == false); 
-console.log(0 === false); 
+console.log(5 == "5");
+console.log(5 === "5");
+console.log(5 != 5);
+console.log(5 != "5");
+console.log(5 !== 5);
+console.log(5 !== "5");
+console.log(0 == false);
+console.log(0 === false);
 console.log(true + false);
 
-// Operadores LÓGICOS
+// 3. Operadores LÓGICOS
 
-// &&
+// && AND
 console.log(true && true); // true
 console.log(true && false); // false
 console.log(false && true); // false
 console.log(false && false); // false
 
-// ||
+// || OR
 console.log(true || true); // true
 console.log(true || false); // true
 console.log(false || true); // true
@@ -170,11 +177,9 @@ console.log(false || false); // false
 // Los operadores && y ||, cuando se usan con operandos no booleanos
 // pueden devolver un resultado no booleano, cualquiera: array, objeto ...
 var a = 3 || 20; // 3. El 3 es el primer valor "truthy" que se encuentra el OR.
-var a = (3 || 20); // 3
 var a = 0 || 20; // 20. El 20 es el primer valor "truthy" que se encuentra el OR.
 var a = Boolean(0 || 20); // true
 var a = 3 && 20; // 20
-var a = (3 && 20); // 20
 var a = 0 && 20; // 0
 var a = Boolean(0 && 20); // false
 var a = 2 > 0 && "hello"; // "hello"
@@ -182,11 +187,9 @@ var a = 2 < 0 && "hello"; // false
 
 // [copy paste version]
 var a = 3 || 20;
-var a = (3 || 20);
 var a = 0 || 20;
 var a = Boolean(0 || 20);
 var a = 3 && 20;
-var a = (3 && 20);
 var a = 0 && 20;
 var a = Boolean(0 && 20);
 var a = 2 > 0 && "hello";
@@ -213,16 +216,14 @@ if (user == "admin") {
   console.log("hello, user");
 }
 
-// else sin llaves, no necesarias
+// else sin llaves, no necesarias (1 sola linea)
 var user = "admin"
-if (user == "admin")
-  console.log("Hello admin");
-else
-  console.log("hello, user");
+if (user == "admin") console.log("Hello admin");
+else console.log("hello, user");
 
 // else if
 var year = 2018;
-if(year < 2015) {
+if (year < 2015) {
   console.log("year is smaller than 2015");
 } else if (year > 2015) {
   console.log("year is greater than 2018");
@@ -230,15 +231,11 @@ if(year < 2015) {
   console.log("year is exactly 2015");
 }
 
-// else if sin llaves, no necesarias
+// else if sin llaves, no necesarias (1 sola linea)
 var year = 2018;
-if (year < 2015)
-  console.log("year is smaller than 2015");
-else if (year > 2015)
-  console.log("year is greater than 2018");
-else
-  console.log("year is exactly 2015");
-
+if (year < 2015) console.log("year is smaller than 2015");
+else if (year > 2015) console.log("year is greater than 2018");
+else console.log("year is exactly 2015");
 
 // switch
 var animal = "dog";
@@ -268,13 +265,12 @@ switch (animal) {
     console.log("Non-mammal");
 }
 
-
 // operador ternario
 var age = 20;
-var status = (age >= 18) ? 'adult' : 'minor';
+var status = (age >= 18) ? "adult" : "minor";
 
 // operador ternario sin paréntesis, no necesario
-var status = age >= 18 ? 'adult' : 'minor';
+var status = age >= 18 ? "adult" : "minor";
 
 // anidamiento de ternarios "ternary nesting"
 var year = 2018;
@@ -298,7 +294,7 @@ for (var i = 0, limit = 10; i < limit; i++) {
 // bucle "while"
 var limit = 10;
 var i = 0;
-while(i < limit) {
+while (i < limit) {
   console.log(i);
   i++;
 }
@@ -320,4 +316,4 @@ console.log(a); // 9
 var b = 3;
 var a = (b += 5, 10);
 console.log(a); // 10
-console.log(b) // 8;
+console.log(b); // 8;
