@@ -20,8 +20,8 @@ interface WithShape {
 const describeObject = (obj: WithColor & WithShape): string =>
   `Your object is ${obj.color} and with ${obj.shape} shape`;
 
-console.log(describeObject({color: "yellow", shape: "round"}));
-console.log(describeObject({color: "blue"})); // TS error: Property 'shape' is missing.
+console.log(describeObject({ color: "yellow", shape: "round" }));
+console.log(describeObject({ color: "blue" })); // TS error: Property 'shape' is missing.
 
 
 
@@ -30,7 +30,7 @@ console.log(describeObject({color: "blue"})); // TS error: Property 'shape' is m
 
 // Siguiendo la analogía anterior, la unión de tipos sería entendida como
 // el operador OR.
-// La unión de tipos es muy util para indicar que una determinada 
+// La unión de tipos es muy util para indicar que una determinada
 // entidad podrá ser de un tipo u otro, ámbos válidos.
 
 // Por ejemplo, sin unión, tendriamos que recurrir al any para admitir
@@ -76,14 +76,14 @@ const randomWoman = (): Woman => ({
   sleep: () => console.log("Woman is zzz"),
 });
 
-const getRandomPerson = (): Man | Woman => 
+const getRandomPerson = (): Man | Woman =>
   randomBool() ? randomMan() : randomWoman();
 
 
 // ¿Cómo se que tengo un hombre o una mujer devueltos?
 const person = getRandomPerson();
-if (person.moustache) {}  // Intellisense error
-if (person.longHair) {} // Intellisese error
+if (person.moustache) { }  // Intellisense error
+if (person.longHair) { } // Intellisese error
 
 // [!] El acceso a estas propiedades causa un error porque tenemos
 // que DESAMBIGUAR el tipo. Para ello recurrimos a las GUARDAS.
@@ -111,7 +111,7 @@ if ((person as Man).moustache !== undefined) {
 }
 
 // Una forma más eficiente para este tipo de guardas sería haciendo
-// uso de de una funcion especial de chequeo que devuelve un 
+// uso de de una funcion especial de chequeo que devuelve un
 // "type predicado":
 const isMan = (whoever: any): whoever is Man =>
   (<Man>whoever).moustache !== undefined;
@@ -130,20 +130,20 @@ const giveMeSomething = (): number | string =>
   randomBool() ? 13 : "trece";
 
 const something = giveMeSomething();
-if (typeof something === "number" ) {}
+if (typeof something === "number") { }
 
 
 // -- Guardas con "instanceof"
 
 // Cuando queremos desambiguar clases, es habitual recurrir
 // al operador "instanceof":
-class Bool {value: boolean};
+class Bool { value: boolean };
 
 const giveMeSomeClass = (): Bool | String =>
-  randomBool() ? {value: true} : "trece";
+  randomBool() ? { value: true } : "trece";
 
 const someClass = giveMeSomeClass();
-if (someClass instanceof Bool ) console.log("Is Bool");
+if (someClass instanceof Bool) console.log("Is Bool");
 else console.log("Is String");
 
 
@@ -157,10 +157,10 @@ type FunctionVoid = () => void;
 type Whatever<T> = {
   value: T;
 }
- 
+
 // Incluso un alias puede referirse a si mismo y aparecer en una
 // propiedad. POP POP POP:
-type SomethingIterable<T> = T & { next: SomethingIterable<T>};
+type SomethingIterable<T> = T & { next: SomethingIterable<T> };
 
 interface Student {
   name: string;
@@ -216,8 +216,8 @@ type WeedDay = keyof Week;
 // Convierte en opcionales las propiedades de un interfaz, en la practica
 // esto permite usar implementaciones parciales de un tipo o interfaz:
 
-const assignDays = (days: Partial<Week>) => console.log(Object.keys(days)); 
-assignDays({monday: "Santi", friday: "Javi"});
+const assignDays = (days: Partial<Week>) => console.log(Object.keys(days));
+assignDays({ monday: "Santi", friday: "Javi" });
 
 
 
@@ -233,7 +233,7 @@ type LightColors = "white" | "yellow" | "pink";
 
 type Status = "sad" | "happy";
 
-type Palette<T extends Status> = T extends "sad" ? 
+type Palette<T extends Status> = T extends "sad" ?
   DarkColors : LightColors;
 
-const palette: Palette<"sad"> = "black";  // Only black or grey allowed.  
+const palette: Palette<"sad"> = "black";  // Only black or grey allowed.
