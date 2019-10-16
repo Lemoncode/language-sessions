@@ -211,17 +211,6 @@ type WeedDay = keyof Week;
 
 
 
-// PARTIAL
-
-// Convierte en opcionales las propiedades de un interfaz, en la practica
-// esto permite usar implementaciones parciales de un tipo o interfaz:
-
-const assignDays = (days: Partial<Week>) => console.log(Object.keys(days));
-assignDays({ monday: "Santi", friday: "Javi" });
-
-
-
-
 // TIPOS CONDICIONALES
 
 // Permite mapear a diferentes tipos comprobando el valor de otro.
