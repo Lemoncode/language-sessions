@@ -1,6 +1,8 @@
 ///-- SYMBOL *******************************************************
 
-// A partir de ES6 se añade un nuevo tipo de datos: Symbol
+// A partir de ES6 se añade un nuevo tipo primitivo de datos: Symbol
+// Este tipo de datos se usa para representar valores únicos. Veamos:
+
 // syntaxis: Symbol("etiqueta") | Symbol()
 const mySymbol = Symbol('sample');
 console.log(typeof mySymbol); // "symbol"

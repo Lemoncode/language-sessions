@@ -3,6 +3,7 @@
 // ES6 introduce dos nuevos constructores: Map y WeakMap
 
 // Ambos nos permiten crear un diccionario de clave-valor, como un objeto literal:
+// Veamos similitudes, y despues veremos diferencias:
 
 const obj = {};
 const map = new Map();
@@ -21,13 +22,14 @@ map.set(3.1415, "número π");
 console.log(map.get(3.1415)); // "número π"
 console.log(map.get("3.1415")); // undefined
 
-const id = (x) => x;
+const id = x => x;
 const user = { name: "Aaron" };
 map.set(id, "función identidad");
 map.set(user, { settings: { theme: "dark" } });
 
 console.log(map.get(id)); // "función identidad"
 console.log(map.get(user)); // {settings: {theme: "dark"}}
+
 // PREGUNTA, ¿que nos daría la siguiente línea?
 console.log(map.get({name: "Aaron"})); // undefined
 console.log(map.size); // 3;
@@ -47,7 +49,11 @@ for(let [key, value] of map) {
 map.delete(id);
 map.get(id); // undefined
 
-// WeakMap es similar a Map pero tiene ligeras diferencias:
+// WeakMap es una variante de Map consistente en un diccionario
+// que me permite asociar objetos (instancias en memoria) a lo que sea,
+// de modo que si dichos objetos son eliminados de la memoria, la entrada
+// del diccionario se limpia automáticamente.
+// Por tanto, tienen las siguientes diferencias con respecto a un Map:
 // 1. Sólo puede utilizar objetos como keys
 // 2. Elimina automáticamente las keys (objetos) junto a los values que ya
 // no se necesiten tener en memoria tras ejecutarse el recolector de basura.
@@ -57,5 +63,4 @@ map.get(id); // undefined
 
 const weak = new WeakMap();
 
-weak.set()
-
+weak.set();
