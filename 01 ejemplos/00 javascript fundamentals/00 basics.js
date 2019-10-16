@@ -47,9 +47,6 @@ null
 // undefined
 undefined
 
-// symbol
-// [!] Lo veremos en más adelante en el apartado ES6
-
 // OBJETOS
 
 // funciones (Son un tipo especial de objetos en JS)
@@ -61,6 +58,8 @@ function main(arg) {
 // object
 // [!] Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo
 
+// symbol
+// [!] Lo veremos en más adelante en el apartado ES6 and beyond
 
 
 ///-- OPERADORES *******************************************************
@@ -73,6 +72,7 @@ console.log(10 * 10); // 100;
 console.log(9 / 3); // 3
 console.log(15 / 2); // 7.5;
 console.log(15 % 3); // 0
+console.log(2 ** 3); // 8
 
 // [copy-paste version]
 console.log(52 + 21);
@@ -82,6 +82,7 @@ console.log(10 * 10);
 console.log(9 / 3);
 console.log(15 / 2);
 console.log(15 % 3);
+console.log(2 ** 3);
 
 // Asignaciones con operadores aritméticos
 var num = 3;
@@ -95,8 +96,12 @@ num -= 5; // Equivalent to num = num - 5
 console.log(num); // 3
 num *= 10; // Equivalent to num = num * 10
 console.log(num); // 30
-num /= 2; // Equivalent to num = num / 2
-console.log(num); // 15
+num /= 6; // Equivalent to num = num / 6
+console.log(num); // 5
+num %= 3; // Equivalent to num = num % 3
+console.log(num); // 2
+num **= 10 // Equivalent to ten times num * num or Math.pow(2, 10)
+console.log(num) // 1024
 
 // [copy paste version]
 var num = 3;
@@ -110,10 +115,15 @@ num -= 5;
 console.log(num);
 num *= 10;
 console.log(num);
-num /= 2;
+num /= 6;
+console.log(num);
+num %= 3;
+console.log(num);
+num **= 10
 console.log(num);
 
-// 2. COMPARACIONES
+
+// 2. Operadores de IGUALDAD
 console.log(3 > 0); // true
 console.log(3 < 0); // false
 console.log(3 > 3); // false
@@ -195,6 +205,11 @@ var a = Boolean(0 && 20);
 var a = 2 > 0 && "hello";
 var a = 2 < 0 && "hello";
 
+
+// 4. Operadores BITWISE u operadores de bits
+// No los daremos pero sabed que existen y que son poco frecuentes.
+// Suelen ser utilizados en implementaciones de algoritmos más "a bajo nivel"
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise
 
 
 
