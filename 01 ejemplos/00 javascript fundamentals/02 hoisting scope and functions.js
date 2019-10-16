@@ -59,6 +59,7 @@ if (true) {
 console.log(name); // "Lara"
 
 // "for" ejemplo
+// Ambas variables message son la misma realmente, hay shadowing.
 var collection = ["hey", "ho", "let's go"];
 var message = "No one says nothing";
 for (var i = 0; i < collection.length; i++) {
