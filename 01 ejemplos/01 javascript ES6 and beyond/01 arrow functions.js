@@ -5,7 +5,6 @@
 
 // Funciones flecha o también llamadas "lambda". Siempre son anónimas.
 const toUpper = (text) => {
-  console.log(text);
   return text.toUpperCase();
 };
 
@@ -49,7 +48,7 @@ printCounter(); // 2
 // Dicho de otro modo, las lambdas no tienen contexto propio porque siempre lo toman
 // prestado desde el contexto donde fueron creadas.
 
-// *** Ejemplos de demostración sencillos ***
+// *** EJEMPLOS DE DEMOSTRACIÓN ***
 
 function f() {
   console.log(this.age);  // Aqui el contexto es el "caller" de la función. this -> caller.
@@ -81,7 +80,51 @@ g.call({surname: "calzado"}); // camargo.
 g(); // camargo.
 
 
-// *** El siguiente ejemplo es algo más complejo pero muy ilustrativo ***
+// *** PROBLEMÁTICA DE LAS FUNCTIONS vs ARROW FUNCTIONS ***
+
+// Las arrow function irrumpieron no solo por ser más expresivas y compactas sino
+// para ofrecer una alternativa de funciones cuyo contexto fuese invariante, no cambiase,
+// siempre es el mismo (ya que lo toma prestado el contexto en el que fue creada.).caption
+// De este modo el 'this' siempre se refiere a lo mismo en una 'arrow function', a diferencia
+// de las funciones que pueden inducir a errores en ciertos casos. Veamos ejemplos:
+
+// WARNING: Elegir uno de los 2 ejemplos.
+// - ¿Corto de tiempo? => EJEMPLO 1. 
+// - ¿Bien de tiempo? => EJEMPLO 2.
+
+// EJEMPLO 1.
+
+// Un ejemplo sencillo de como una function normal puede jugarnos una mala pasada
+// debido al THIS.
+
+// ** Problematica **
+// Supongamos una función que simplemente loguee un texto almacenado globalmente.
+text = "Mensaje almacenado en contexto princial";
+const logText = function() {
+  console.log(this.text);
+};
+
+// Aqui el 'this' se refiere al contexto global, donde tenemos 'text'.
+logText(); // "Mensaje almacenado en contexto princial"
+
+// Pero ¿y aqui? En este caso, quien llama a la función logText es el 'document'
+// y no el contexto global (window). Y por tanto no existe miembro 'text' 
+document.addEventListener("mousemove", logText); // undefined.
+
+// ** Arreglo **
+// Para arreglar esto basta con usar una arrow function en su lugar ya que nos
+// garantiza que el this siempre siempre siempre se refiere al contexto donde
+// fue definida, y por tanto es invariante.
+
+text = "Mensaje almacenado en contexto princial";
+const logText = () => console.log(this.text);
+logText(); // "Mensaje almacenado en contexto princial"
+document.addEventListener("mousemove", logText); // "Mensaje almacenado en contexto princial"
+
+
+
+// EJEMPLO 2.
+// El siguiente ejemplo es algo más complejo pero muy ilustrativo 
 // Veamos la problemática que existía con las funciones "functions":
 
 function ClassRoom(title, students) { // PascalCase es la convención para nombrar constructores.
@@ -156,7 +199,7 @@ secondPrimary.showStudents();
 // de la variable dinámica "arguments".
 function sum() {
   let total = 0;
-  for (let num of arguments) {  // Aprovechar y explicar el for..of
+  for (const num of arguments) {  // Aprovechar y explicar el for..of
     total += num;
   }
   return total;

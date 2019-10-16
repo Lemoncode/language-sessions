@@ -1,6 +1,6 @@
 ///-- NOTACIÓN JSON *******************************************************
 
-// La notación JSON consiste en un objeto formado por clave : valor.
+// La notación JSON consiste en un objeto formado por pares de clave : valor.
 // Las claves obligatoriamente deben ser strings con comillas dobles.
 // Los valores deben ser strings, números, booleanos, null, objetos y arrays.
 // No puede tener comentarios
@@ -69,6 +69,7 @@ try {
 
 function doOperation() {
   he$-s*lloworld; // SyntaxError
+  return window(); // TypeError
   return a * 5; // ReferenceError
   return Array(-5); // RangeError
 }
@@ -76,13 +77,10 @@ function doOperation() {
 try {
   doOperation();
 } catch (err) {
-  if(err instanceof TypeError) {
-    console.log('typeerror catched');
-  } else if (err instanceof RangeError) {
-    console.log('rangeerror catched');
-  } else {
-    console.log('another error');
-  }
+  if (err instanceof ReferenceError) console.log("referenceerror catched");
+  else if (err instanceof TypeError) console.log("typeerror catched");
+  else if (err instanceof RangeError) console.log("rangeerror catched");
+  else console.log("another error");
 }
 
 

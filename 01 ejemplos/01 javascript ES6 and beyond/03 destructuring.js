@@ -125,13 +125,23 @@ console.log(center); // 10;
 
 // "DESTRUCTURING" PARA REASIGNAR VARIABLES
 
-// Supongamos un escenario en el que queremos reasignar variables:
-let a = 5;
-let b = 1;
+// Se pueden hacer cosas bastante bizarras con el destructuring, como
+// por ejemplo hacer un swap de variables de una sola vez. Veamos:
 
-// Y queremos reasignarlas. La forma clásica sería;
-b = a + b;
-a = a + 5;
+let a = "a";
+let b = "b";
 
-// Con destructuring se podría compactar en una sola línea del siguiente modo:
-[a , b] = [a + 5, a + b];
+// Swap clásico, nos tenemos que apoyar en variables auxiliares
+const temp = a;
+a = b;
+b = temp;
+
+console.log(a);
+console.log(b);
+
+// Sin embargo, recurriendo al destrúcturing, se puede hacer un swap
+// inmediato, en una sola línea:
+[a, b] = [b, a];
+
+console.log(a);
+console.log(b);
