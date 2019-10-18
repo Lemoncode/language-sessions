@@ -143,6 +143,15 @@ console.log(3 >= 3); // true
 console.log(3 <= 3); // true
 console.log(5 == 5); // true
 
+// [copy paste version]
+console.log(3 > 0); 
+console.log(3 < 0); 
+console.log(3 > 3); 
+console.log(3 < 3); 
+console.log(3 >= 3); 
+console.log(3 <= 3); 
+console.log(5 == 5); 
+
 
 
 // "TYPE COERCION"
