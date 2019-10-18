@@ -20,8 +20,13 @@ var a = 5;
 
 ///-- TIPOS DE DATOS *******************************************************
 
+// 6 tipos primitivos + Objetos
+
 
 // PRIMITIVOS
+
+// Aquellos que trae el lenguaje por defecto. Un typo primitivo es aquel
+// que no es un objeto y por tanto no tiene métodos.
 
 // string
 "hello world" // dobles comillas
@@ -47,7 +52,14 @@ null
 // undefined
 undefined
 
+// symbol
+// [!] Lo veremos en más adelante en el apartado ES6 and beyond
+
+
 // OBJETOS
+
+// object
+// [!] Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo
 
 // funciones (Son un tipo especial de objetos en JS)
 function main(arg) {
@@ -55,11 +67,8 @@ function main(arg) {
   return arg;
 }
 
-// object
-// [!] Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo
+console.log(typeof main); // "function" Aunque en el fondo, es también un objeto, un objeto especial.
 
-// symbol
-// [!] Lo veremos en más adelante en el apartado ES6 and beyond
 
 
 ///-- OPERADORES *******************************************************
@@ -71,8 +80,8 @@ console.log(10 - 5); // 5
 console.log(10 * 10); // 100;
 console.log(9 / 3); // 3
 console.log(15 / 2); // 7.5;
-console.log(15 % 3); // 0
-console.log(2 ** 3); // 8
+console.log(15 % 3); // 0 (Módulo o resto)
+console.log(2 ** 3); // 8 (Exponenciación)
 
 // [copy-paste version]
 console.log(52 + 21);
@@ -123,7 +132,9 @@ num **= 10
 console.log(num);
 
 
-// 2. Operadores de IGUALDAD
+// 2. Operadores de COMPARACIÓN
+// Mayor que, menor que, igualdad, desigualdad
+
 console.log(3 > 0); // true
 console.log(3 < 0); // false
 console.log(3 > 3); // false
@@ -132,31 +143,21 @@ console.log(3 >= 3); // true
 console.log(3 <= 3); // true
 console.log(5 == 5); // true
 
-// En JavaScript podemos evaluar valores de distintios tipos como
-// booleanos, y nos interesa conocer cuales se evaluarán a true y a false.
-// Los que se evaluan a false, se les llama "falsy values":
-0;
-NaN;
-false;
-("");
-null;
-undefined;
-// el resto serán evaluados como "truthy values"
 
-// "TYPE COERTION"
+
+// "TYPE COERCION"
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
 // Puesto que JS no es un lenguaje tipado, se puede comparar miembros de distinta naturaleza (distinto tipo). En tal
-// caso, la estrategia que sigue JS es convertir uno de los miembros o los dos a un tipo común para poder realizar la
-// comparativa. A esto se le llama "type coertion".
-console.log(5 == "5"); // true // [!] Loose equality. Igualdad débil.
+// caso, la estrategia que sigue JS es convertir implicitamente uno de los miembros o los dos a un tipo común 
+// para poder realizar la comparativa. A esto se le llama "type coercion" o "conversión implícita/automática".
+console.log(5 == "5"); // true // [!] Loose equality. Igualdad débil. (Por type coertion, "5" string se convierte a 5 numero)
 console.log(5 === "5"); // false // [!] Strict equality. Igualdad fuerte.
 console.log(5 != 5); // false
-console.log(5 != "5"); // false
+console.log(5 != "5"); // false. (Por type coercion, "5" string se convierte a 5 numero)
 console.log(5 !== 5); // false
 console.log(5 !== "5"); // true
-console.log(0 == false); // true. (falsy == falsy)
+console.log(0 == false); // true. (Por type coercion, false se castea a 0)
 console.log(0 === false); // false. (number != boolean)
-console.log(true + false); // 1. (1 + 0)
 
 // [copy paste version]
 console.log(5 == "5");
@@ -168,6 +169,17 @@ console.log(5 !== "5");
 console.log(0 == false);
 console.log(0 === false);
 console.log(true + false);
+
+// Type coertion o casteo de tipos también se aplica a otros operadores
+console.log(true + false); // 1. (1 + 0)
+console.log(true - false); // 1. (1 - 0)
+console.log("num" + 3); // "num3". 3 (numero) se castea a "3" (string) y se concatena. 
+console.log(3 + "num"); // "3num". 3 (numero) se castea a "3" (string) y se concatena.
+// ¿Y esto que daría?
+console.log("num" - 3); // NaN. Porque convierte "num" (string) a NaN (número) y NaN - 3 = NaN.
+// ¿Pero y esto otro?
+console.log("" - 3); // -3. Porque convierte "" (string vacio) a 0 (número) y 0 - 3 = -3.
+
 
 // 3. Operadores LÓGICOS
 
@@ -183,9 +195,27 @@ console.log(true || false); // true
 console.log(false || true); // true
 console.log(false || false); // false
 
-// OJO. De nuevo, JS puede tener operandos de distinta naturaleza.
+// IMPORTANTE. De nuevo, JS puede tener operandos de distinta naturaleza.
 // Los operadores && y ||, cuando se usan con operandos no booleanos
 // pueden devolver un resultado no booleano, cualquiera: array, objeto ...
+
+// Por ejemplo:
+var a = 3 || 20; // 3.
+
+// Para saber que operando se devuelve, JS tiene que evaluarlos como booleanos
+// ya que los operadores lógicos trabajan con operandos booleanos.
+// En JavaScript, al convertir o evaluar cualquier valor como booleano, pueden suceder
+// 2 cosas, que nos de true o que nos de false. A los valores que nos dan false se le
+// conocen como "falsy values" y son sólamente estos:
+0;
+NaN;
+false;
+("");
+null;
+undefined;
+// el resto de valores serán evaluados como "truthy values"
+
+// MAS EJEMPLOS:
 var a = 3 || 20; // 3. El 3 es el primer valor "truthy" que se encuentra el OR.
 var a = 0 || 20; // 20. El 20 es el primer valor "truthy" que se encuentra el OR.
 var a = Boolean(0 || 20); // true
