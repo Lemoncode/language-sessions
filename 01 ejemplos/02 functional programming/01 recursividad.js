@@ -33,7 +33,13 @@ const declarativeSum = (collection) => collection.reduce((acc, val) => acc + val
 console.log(declarativeSum(numbers));
 
 // Recursiva
-const recursiveSum1 = (() => {
+const recursiveSum1 = (arr) => {
+  if (!arr.length) return 0;
+  const [head, ...tail] = arr;
+  return head + recursiveSum3(tail);
+};
+
+const recursiveSum2 = (() => {
   const innerRecursiveSum = (collection, index) => {
     if (index < 0) return 0;
     return collection[index] + innerRecursiveSum(collection, index - 1)
@@ -42,7 +48,7 @@ const recursiveSum1 = (() => {
   return (collection) => innerRecursiveSum(collection, collection.length - 1);
 })();
 
-const recursiveSum2 = (() => {
+const recursiveSum3 = (() => {
   const innerRecursiveSum = (collection, index) => {
     if (index >= collection.length) return 0;
     return collection[index] + innerRecursiveSum(collection, index + 1)
@@ -50,11 +56,6 @@ const recursiveSum2 = (() => {
 
   return (collection) => innerRecursiveSum(collection, 0);
 })();
-
-const recursiveSum3 = ([head, ...tail]) => {
-  if (!tail.length) return head;
-  return head + recursiveSum3(tail);
-};
 
 console.log(recursiveSum1(numbers));
 console.log(recursiveSum2(numbers));

@@ -15,6 +15,7 @@ import {
   equals,
   filter,
   flip,
+  head,
   inc,
   isEmpty,
   last,
@@ -32,7 +33,7 @@ import {
 
 const isMultipleOf = curry(compose(equals(0), flip(modulo)));
 const rule = (predicate, result) => when(
-  compose(predicate, view(lensIndex(0))),
+  compose(predicate, head),
   over(lensIndex(1), concat(__, result))
 );
 
