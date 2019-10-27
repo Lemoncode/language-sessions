@@ -86,7 +86,7 @@ enum Release {
   NewYearPackage = 2.0
 }
 const rel: Release = Release.ImprovedSupport;
-console.log(rel);
+console.log(rel); // 1.4
 const relName: string = Release[1.4];
 const relName1: string = Release[Release.ImprovedSupport];
 console.log(relName);  // ImprovedSupport

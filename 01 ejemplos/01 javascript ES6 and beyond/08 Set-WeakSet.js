@@ -35,9 +35,9 @@ console.log(set); // Set(4) { "Android", "iOS", {name: "Debian"} "Windows Phone"
 set.add({name: "ChromeOS"});
 set.add({name: "ChromeOS"}); // Distinta referencia
 console.log(set);
-// Set(6) { "Android", "iOS", {name: "Debian"} "Windows Phone", {name: "ChromeOS"}, {name: "ChromeOS"} }
+// Set(6) { "Android", "iOS", {name: "Debian"}, "Windows Phone", {name: "ChromeOS"}, {name: "ChromeOS"} }
 
-
+// Otros métodos del set son:
 console.log(set.has("Android")); // true
 console.log(set.delete("Windows")); // false
 console.log(set.delete("Windows Phone")); // true
