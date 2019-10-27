@@ -152,6 +152,8 @@ else console.log("Is String");
 
 // Un alias no es más que un nuevo nombre para un tipo, sea cual sea,
 // tipos primitivos, interfaces, funciones, uniones, etc:
+// Es muy util para REUSAR tipos cuya definición es más compleja o verbosa
+// de forma fácil y eficiente, sin tener que repetirla una y otra vez.
 type Message = string | number;
 type FunctionVoid = () => void;
 type Whatever<T> = {
@@ -176,7 +178,8 @@ myClass.next.next.name;
 // STRING LITERALS
 
 // Muy útil para hacer que un tipo solo pueda tomar determinados
-// string literales como posibles valores, es decir:
+// string literales como posibles valores, es decir, limitamos los
+// posible string que puede tomar como valores a un conjunto dado:
 type WorkDay = "monday" | "tuesday" | "wednesday" | "thursday" | "friday";
 const day: WorkDay = "sunday";  // "sunday" is not assignable.
 
@@ -198,7 +201,7 @@ const throwDice = (): 1 | 2 | 3 | 4 | 5 | 6 => {
 // posibles literales de un tipo concreto:
 interface Week {
   monday: string;
-  tuestday: string;
+  tuesday: string;
   wednesday: string;
   thursday: string;
   friday: string;

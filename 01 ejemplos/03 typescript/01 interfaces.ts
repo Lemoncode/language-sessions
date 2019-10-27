@@ -34,7 +34,7 @@ const car: Car = {
   color: 'red' // [ts] Object literal may only specify known properties,and 'color' does not exist on type 'Car'
 }
 
-// Podemos utilizar interfaces como tipos dentro de otras inferfaces:
+// Podemos ANIDAR, es decir, utilizar interfaces como tipos dentro de otras inferfaces:
 interface Address {
   zipCode: number;
   city: string;
@@ -55,22 +55,22 @@ const citizen: Citizen = {
   name: 'Javier',
 };
 
-// - Propiedades Opcionales
+// *** Propiedades Opcionales
 // TypeScript soporta tipos opcionales mediante el operador [?]. Una 
 // propiedad opciones no es más que aquella cuyo valor puede ser ser definido
 // o no (en este segundo caso sería undefined).
 
 // Podemos definir propiedades opcionales de una interfaz
 interface Book {
-  id?: number;
-  author: string;
+  isbn: number;
+  author?: string;
 }
-const book1: Book = { author: "Rolan" };
-console.log(book1.id); // undefined
-const book2: Book = { author: "Rolan", id: 321 };
-console.log(book2.id); // 321
+const book1: Book = { isbn: 764589621 };
+console.log(book1.author); // undefined
+const book2: Book = { isbn: 854632187, author: "Rolan" };
+console.log(book2.author); // Rolan
 
-// - Propiedades Read-Only
+// *** Propiedades Read-Only
 // Podemos forzar a que ciertas propiedades sean de sólo lectura. Para
 // ello usaremos el operador "readonly" delante de la propiedad. 
 // Con esto conseguimos establecer el valor de la propiedad a la hora
@@ -89,17 +89,7 @@ interface RepeatString {
   (value: string, times: number): string;
 }
 
-const repeatString: RepeatString = function(value, times) {
-  const repetitions = [];
-  for (let i = 0; i < times; i++) {
-    repetitions.push(value);
-  }
-
-  return repetitions.join(' '); 
-  // Ahora que sabemos funcional, esto sería equivalente a:
-  // Array(times).fill(value).join(" ");
-};
-
+const repeatString: RepeatString = (value, times) => Array(times).fill(value).join(" ");
 console.log(repeatString("echo", 3)); // "echo echo echo"
 
 // Extendiendo interfaces
@@ -143,7 +133,7 @@ const ninja: Ninja = {
 
 
 
-// - Duck typing
+// *** Duck typing
 // TypeScript no tan estricto a la hora de tipar y no tiene en cuenta 
 // semánticamente los tipos, sino que sigue una comparación estructural.
 // Vemos el siguiente ejemplo:

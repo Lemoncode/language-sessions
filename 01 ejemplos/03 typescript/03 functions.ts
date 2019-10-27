@@ -39,9 +39,11 @@ const shout = (text: string, upperCase: boolean = true): string =>
 
 console.log(shout("hi")); // "HI!!!"
 
-// También podemos utilizar el operador type para
-// declarar el tipo de una función anónima (esto se conoce como 
-// ALIAS y lo veremos un poco más adelante):
+// En estos ejemplos vistos, el tipado de la funcion va integrado en
+// la propia declaración/definición de la función.
+// Sin embargo, podemos extraer el typo de una función aparte, y
+// reusarlo cuando queramos. Para ello usamos el operador "type".
+// Esto se conoce como ALIAS y lo veremos un poco más adelante:
 type ShoutFunction = (text: string, upperCase: boolean) => string;
 const shout: ShoutFunction = (text, upperCase) =>
   (upperCase ? text.toUpperCase() : text) + "!!!";
