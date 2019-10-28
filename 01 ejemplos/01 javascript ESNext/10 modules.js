@@ -22,7 +22,7 @@
 // https://codesandbox.io/s/48qk1px1wx
 
 // Demo AMD
-// https://codesandbox.io/s/1v545547p7
+// http://next.plnkr.co/edit/IYYj6f7hXUACTAW7Df1R?preview
 
 // Demo CommonJS
 // https://codesandbox.io/s/2x766oxy3n
