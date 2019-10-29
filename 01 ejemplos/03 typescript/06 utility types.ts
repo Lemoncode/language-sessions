@@ -99,13 +99,3 @@ const user: User = {
 
 const addTimestamp = (user: User) => ({ ...user, timestamp: Date.now() });
 type UserWithTimestamp = ReturnType<typeof addTimestamp>;
-
-
-// NONNULLABLE
-
-// NonNullable permite crear un tipo cuyas propiedades no puedan ser ni null ni undefined
-const greet = (name: string | null) =>
-  name ?
-    `Hello, ${name}!` :
-    "Hello, unknown";
-
