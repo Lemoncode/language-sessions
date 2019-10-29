@@ -20,18 +20,11 @@ const pos1: Geoposition = { // [ts] Type '{ latitude: number; }' is not assignab
   latitude: 3.3112,
 };
 
-// Las interfaces especifican la estructura que un objeto debe seguir,
-// por lo que especificar propiedades por exceso lanzará errores de
-// compilación
-interface Car {
-  model: string;
-  brand: string;
-}
-
-const car: Car = {
-  brand: 'Clio',
-  model: 'Leon',
-  color: 'red' // [ts] Object literal may only specify known properties,and 'color' does not exist on type 'Car'
+// También si especificamos propiedades por exceso, lanzaría un error.
+const pos2: Geoposition = {
+  latitude: 3.3112,
+  longitude: 5.1123,
+  altitude: 325,
 }
 
 // Podemos ANIDAR, es decir, utilizar interfaces como tipos dentro de otras inferfaces:
