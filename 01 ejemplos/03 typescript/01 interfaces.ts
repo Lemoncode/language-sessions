@@ -68,7 +68,7 @@ console.log(book2.author); // Rolan
 // ello usaremos el operador "readonly" delante de la propiedad. 
 // Con esto conseguimos establecer el valor de la propiedad a la hora
 // de crear el objeto denegando la posibilidad (a nivel de compilación)
-// de modificar dicha propiedad:
+// de reasignar dicha propiedad:
 interface Product {
   readonly id: number;
   stock: number;
@@ -76,14 +76,6 @@ interface Product {
 const product: Product = { id: 998, stock: 0 };
 product.stock = 20;
 product.id = 339; // [ts] Cannot assign to 'id' because it is a constant or a 'read-only' property
-
-// Tipando funciones en un interfaz
-interface RepeatString {
-  (value: string, times: number): string;
-}
-
-const repeatString: RepeatString = (value, times) => Array(times).fill(value).join(" ");
-console.log(repeatString("echo", 3)); // "echo echo echo"
 
 // Extendiendo interfaces
 interface MyEvent {

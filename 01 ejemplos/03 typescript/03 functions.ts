@@ -78,3 +78,11 @@ function switchType(c) {
 const r1 = switchType(3);
 const r2 = switchType("65");
 const r3 = switchType({}); // [ts] Argument of type '{}' is not assignable to parameter of type 'number'
+
+// Tipando funciones en un interfaz
+interface RepeatString {
+  (value: string, times: number): string;
+}
+
+const repeatString: RepeatString = (value, times) => Array(times).fill(value).join(" ");
+console.log(repeatString("echo", 3)); // "echo echo echo"
