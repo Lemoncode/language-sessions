@@ -131,25 +131,7 @@ const medName: string = MediaTypes[MediaTypes.JSON]; // undefined
   MediaTypes["PLAIN"] = "OTHER"; // [!] Hemos sobreescrito la propiedad "PLAIN" de (1)
 */
 
-// *** Any
-// ¿Y si no sabemos que tipo es? Puede haber datos dinámicos que a priori
-// no sepamos su tipo, imaginemos datos que vienen de servidor;
-const getServerData = () => { /*¿?*/ };
-let myData: any = getServerData();
-myData = "Maybe is a string";
-myData = false;
-myData = {}
-myData = () => console.log("I am a function now");
-myData.push(3)  // Ok, myData podría ser un array y por tanto .push() podría existir.
-myData.toExponential(2)   // Ok, myData podría ser un numero y por tanto .toExponential() podría ser válido.
 
-let falsyValues: any[] = [0, undefined, null, NaN, false];
-falsyValues.push('');
-
-// Any es potente y la vez peligroso. Nos permite 'desactivar' el chequeo
-// de tipos cuando queramos. Puede ser útil si sabemos lo que hacemos pero
-// también abrimos la puerta a posibles erroes. Es lo más parecido a volver
-// a vanilla JS.
 
 // *** Void
 // Es justo lo contrario de "any", la ausencia de cualquier tipo. Mientras
@@ -195,6 +177,26 @@ const neverEndingFunction = (): never => {
 }
 
 // Never suele ser empleado internamente por TS para indicar algun tipo de error.
+
+// *** Any
+// ¿Y si no sabemos que tipo es? Puede haber datos dinámicos que a priori
+// no sepamos su tipo, imaginemos datos que vienen de servidor;
+const getServerData = () => { /*¿?*/ };
+let myData: any = getServerData();
+myData = "Maybe is a string";
+myData = false;
+myData = {}
+myData = () => console.log("I am a function now");
+myData.push(3)  // Ok, myData podría ser un array y por tanto .push() podría existir.
+myData.toExponential(2)   // Ok, myData podría ser un numero y por tanto .toExponential() podría ser válido.
+
+let falsyValues: any[] = [0, undefined, null, NaN, false];
+falsyValues.push('');
+
+// Any es potente y la vez peligroso. Nos permite 'desactivar' el chequeo
+// de tipos cuando queramos. Puede ser útil si sabemos lo que hacemos pero
+// también abrimos la puerta a posibles erroes. Es lo más parecido a volver
+// a vanilla JS.
 
 
 // TYPE ASSERTION o ASEVERACIÓN DE TIPOS
