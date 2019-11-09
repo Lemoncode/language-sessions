@@ -2,13 +2,13 @@
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",
-    "watch": true
+    "watch": true,
+    "allowJs": true,
+    "outDir": "transpiled"
   },
   "compileOnSave": true,
   "exclude": [
     "node_modules"
   ],
-  "include": [
-    "src/**/*.ts"
-  ]
+  "include": ["src"]
 }

@@ -27,9 +27,8 @@
   "scripts": {
     "start": "npm run copy && run-p transpile devserver",
     "copy": "copyfiles --flat src/**/*.{html,css} transpiled",
-    "transpile": "tsc --outDir transpiled",
-    "devserver": "lite-server -c bs-config.json",
-    "tsc": "tsc"
+    "transpile": "tsc",
+    "devserver": "lite-server -c bs-config.json"
   },
   "dependencies": {
     "lite-server": "^2.5.4"
