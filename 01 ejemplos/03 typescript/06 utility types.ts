@@ -21,7 +21,7 @@
 
 // *** PARTIAL ***************
 
-// Convierte en opcionales las propiedades de un interfaz, en la practica
+// Convierte en opcionales las propiedades de una interfaz, en la práctica
 // esto permite usar implementaciones parciales de un tipo o interfaz:
 
 // -- Caso Base --
@@ -33,7 +33,7 @@ interface Person {
 type PartialPerson = Partial<Person>;
 
 // -- Caso Práctico --
-const createState = <T extends object = any>(initialState: T) => {
+const createState = <T extends object>(initialState: T) => {
   let state: T = initialState;
 
   return {
@@ -42,9 +42,14 @@ const createState = <T extends object = any>(initialState: T) => {
   };
 };
 
-const { setState } = createState({ prop1: "hi", prop2: 43, prop3: true });
+const { setState } = createState({
+  username: "b4dc4t",
+  avatar: "cat.png",
+  posts: 18,
+  premium: false
+});
 
-console.log(setState({ prop2: 34 }));
+console.log(setState({ posts: 19, premium: true }));
 
 // -- Definición --
 type MyPartial<T> = {
@@ -151,7 +156,7 @@ type MyReadonly<T> = {
 // *** EXCLUDE & EXTRACT ***************
 
 // Utilidades para excluir/extraer elementos comunes en dos uniones.
-// EXCLUDE: excluye de la primera unión los tipos que tiene en común con la 
+// EXCLUDE: excluye de la primera unión los tipos que tiene en común con la
 // segunda. Por tanto calcula la diferencia matemática.
 // EXTRACT: extrae de la primera unión los tipos que tiene en común con la
 // segunda. Por tanto calcula la intersección matemática.
@@ -236,7 +241,7 @@ type MyExtract<T, U> = T extends U ? T : never;
 // tipándolas de igual forma. En definitiva, extrae un subconjunto de
 // propiedades (y sus tipos) de una interfaz para generar otra distinta.
 
-// OMIT es el opuesto de PICK, nos permite generar un interfaz a partir de 
+// OMIT es el opuesto de PICK, nos permite generar un interfaz a partir de
 // otro pero en este caso eliminando las propiedades que no deseamos. Es
 // decir, genera una nueva interfaz excluyendo propiedades de la original.
 
@@ -261,29 +266,29 @@ type EmployeeInfo = Diff2<EmployeeSummary, EmployeeID>;
 // -- Caso Práctico --
 
 // Versión más espartana.
-const filterObject = <T extends object, K extends keyof T>(
+const omit = <T extends object, K extends keyof T>(
   o: T,
-  ...filterKeys: K[]
+  ...keys: K[]
 ): Omit<T, K> => {
   const result = { ...o };
-  filterKeys.forEach(key => delete result[key]);
+  keys.forEach(key => delete result[key]);
   return result;
 };
 
 // Versión más funcional.
-const filterObject2 = <T extends object, K extends keyof T>(
+const omit2 = <T extends object, K extends keyof T>(
   o: T,
-  ...filterKeys: K[]
+  ...keys: K[]
 ): Omit<T, K> =>
   Object.fromEntries(
-    Object.entries(o).filter(([key]) => !filterKeys.includes(key as K))
+    Object.entries(o).filter(([key]) => !keys.includes(key as K))
   ) as Omit<T, K>;
 
 
 const sampleObj = { a: "A", b: "B", c: "C" };
-const filteredObject = filterObject(sampleObj, "a", "b");
-console.log(filteredObject);
-// filteredObject. // Check intellisense!
+const onlyC = omit(sampleObj, "a", "b");
+console.log(onlyC);
+// onlyC. // Check intellisense!
 
 // -- Definición --
 type MyPick<T, K extends keyof T> = {
@@ -309,7 +314,7 @@ const ukSizes: UkSizes = { small: 8, medium: 10, large: 12 };
 
 // -- Caso Práctico --
 // Ejemplo más elaborado donde vamos a usar Record para transformar
-// un mismo interfaz de distintas formas.
+// una misma interfaz de distintas formas.
 interface Inventoriable {
   id: number;
   name: string;
@@ -321,7 +326,7 @@ const pivotInventory = <T extends Inventoriable = Inventoriable>(
   list: InventoryByName<T>
 ): InventoryById<T> => {
   return Object.entries<Omit<Inventoriable, "name">>(list).reduce((result, [name, product]) => {
-    result[product.id as number] = { name, ...filterObject(product, "id") };
+    result[product.id] = { name, ...omit(product, "id") };
     return result;
   }, {} as InventoryById<T>);
 };
@@ -363,6 +368,43 @@ type ValidChoice = NonNullable<Choice>;
 // Tiene sentido en un entorno estricto (strictNullChecks) de lo contrario
 // el compilador siempre permitirá valores a null/undefined para cualquier
 // tipo.
+
+// Un 'draft' puede ser usado tanto en un formulario de edición como en uno de inserción
+interface BookingDraft {
+  id: number | null; // 'number' para edición, 'null' para inserción
+  price: number;
+  room: 'standard' | 'superior';
+  prepaid: boolean;
+}
+
+// Declaramos un helper que nos permita seleccionar qué propiedades no pueden ser 'null'
+type NonNullableKeys<O, K extends keyof O> = {
+  [P in keyof O]: P extends K ? NonNullable<O[P]> : O[P];
+}
+
+
+// Definimos la interfaz que la API REST nos devuelve. Este sí debe tener obligatoriamente 'id' no nulo
+type Booking = NonNullableKeys<BookingDraft, 'id'>;
+
+// Ejemplo de API,
+const bookings: Booking[] = [
+  { id: 31, prepaid: false, price: 80, room: 'standard' },
+  { id: 16, prepaid: true, price: 115, room: 'standard' },
+  { id: 25, prepaid: true, price: 250, room: 'superior' }
+];
+const bookingAPI = {
+  async getBooking(id: number): Promise<Booking | null> {
+    return bookings.find(b => b.id === id) || null;
+  }
+}
+
+// Ejemplo intellisense
+const foo: Booking = {
+  id: null, // Error: Type 'null' is not assignable to type 'number'
+  prepaid: false,
+  price: 31,
+  room: 'superior'
+}
 
 // -- Definición --
 type MyNonNullable<T> = T extends null | undefined ? never : T;
