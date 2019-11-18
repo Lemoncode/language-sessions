@@ -1,37 +1,72 @@
-///-- TIPOS AVANZADOS *******************************************************
+///-- TIPOS AVANZADOS **************************************************
 
 // Hasta ahora hemos visto la base de Typescript sobre la que se sustenta
 // todo el chequeo de tipos. Pero la verdadera potencia llega con los tipos
 // avanzado.
 
 
-// INTERSECCIÓN
+
+// *** ALIAS ***************
+
+// Un alias no es más que un nuevo nombre para un tipo, sea cual sea,
+// tipos primitivos, interfaces, funciones, uniones, etc:
+// Es muy util para REUSAR tipos cuya definición es más compleja o verbosa
+// de forma fácil y eficiente, abstrayéndola a un nombre simple, sin tener
+// que repetirla una y otra vez.
+
+// -- Caso Base --
+type Message = string | number;
+type FunctionVoid = () => void;
+type Whatever<T> = {
+  value: T;
+}
+
+// Muy util para abstraernos de definiciones complejas. No crea nuevos
+// tipos, solo nuevos nombres para referirse a ellos.
+type ReducerFunction<S> = (previousState: S, update: Partial<S>) => S;
+
+
+
+
+// *** INTERSECCIÓN ***************
 
 // Con la intersección podemos combinar múltiples tipos en uno solo. Sería
-// equivalente al operador AND pero con tipos. Es muy util para componer:
-interface WithColor {
-  color: string;
-}
+// equivalente al operador AND lógico pero con tipos.
+// Es muy util para hacer composiciones:
 
-interface WithShape {
-  shape: string;
-}
+// -- Caso Base --
+type Merged = { a: string } & { b: string };
+const ab: Merged = { a: "A", b: "B" };
 
-const describeObject = (obj: WithColor & WithShape): string =>
-  `Your object is ${obj.color} and with ${obj.shape} shape`;
-
-console.log(describeObject({ color: "yellow", shape: "round" }));
-console.log(describeObject({ color: "blue" })); // TS error: Property 'shape' is missing.
+// Podría haber colisión, en tal caso, el tipado será never:
+type MergedCollision = { a: string } & { a: number }; // a: never
+const abc: MergedCollision = { a: 1 }; // Ni number ni string
 
 
+// -- Caso Práctico --
+const compose = <A, B>(a: A, b: B): A & B => ({ ...a, ...b });
 
-// UNION
+const cat = compose({ type: "feline" }, { skill: "hunting" });
+const pigeon = compose({ wings: true }, { type: "bird" });
 
+console.log(cat.type);
+console.log(pigeon.skill); // TS error: Property 'skill' is missing.
+
+
+
+
+// *** UNIÓN ***************
 
 // Siguiendo la analogía anterior, la unión de tipos sería entendida como
-// el operador OR.
-// La unión de tipos es muy util para indicar que una determinada
-// entidad podrá ser de un tipo u otro, ámbos válidos.
+// el operador OR. La unión de tipos es muy util para indicar que una
+// determinada entidad podrá ser de un tipo u otro, ámbos válidos.
+
+// -- Caso Base --
+type A = "a" | "A" | "á" | "à";
+type B = "b" | "B";
+type AB = A | B; // "a" | "A" | "á" | "à" | "b" | "B"
+
+// -- Caso Práctico --
 
 // Por ejemplo, sin unión, tendriamos que recurrir al any para admitir
 // argumentos de tipo string o númerico:
@@ -40,17 +75,20 @@ const saySomething = (message: any) => console.log(message);
 // Pero con la unión, restringimos el argumento a los tipos deseados:
 const saySomethingTyped = (message: string | number) => console.log(message);
 
-saySomethingTyped(true) // Argument of type 'true' is not assignable
+saySomethingTyped(true); // Argument of type 'true' is not assignable
 
 
-// GUARDAS
+// *** GUARDAS ***************
 
 // La situación anterior, sin embargo, puede llevarnos a un escenario donde
 // tengamos que comprobar de que tipo concreto es un determinado argumento
 // recibido, de entre todos los posibles tipos de su unión.
 
-// Imaginemos la siguiente situacion, 2 interfaces y una función que devuelve
-// uno u otro de forma aleatoria:
+// Por tanto, las guardas surjen ante la necesidad de tener que desambiguar
+// uniones.
+
+// Imaginemos la siguiente situacion, 2 interfaces y una función que
+// devuelve uno u otro de forma aleatoria:
 
 const randomBool = (): boolean => Boolean(Math.round(Math.random()));
 
@@ -110,9 +148,11 @@ if ((person as Man).moustache !== undefined) {
   console.log("Woman with long hair:", (<Woman>person).longHair);
 }
 
+// Hasta aqui bien, pero hemos tenido que 'engañar' a intellisense
+// para que funcione correctamente.
 // Una forma más eficiente para este tipo de guardas sería haciendo
 // uso de de una funcion especial de chequeo que devuelve un
-// "type predicado":
+// "type predicate":
 const isMan = (whoever: any): whoever is Man =>
   (<Man>whoever).moustache !== undefined;
 
@@ -148,30 +188,31 @@ else console.log("Is String");
 
 
 
-// ALIAS
 
-// Un alias no es más que un nuevo nombre para un tipo, sea cual sea,
-// tipos primitivos, interfaces, funciones, uniones, etc:
-// Es muy util para REUSAR tipos cuya definición es más compleja o verbosa
-// de forma fácil y eficiente, sin tener que repetirla una y otra vez.
-type Message = string | number;
-type FunctionVoid = () => void;
-type Whatever<T> = {
-  value: T;
-}
+// *** RECURSIVIDAD ***************
 
-// Incluso un alias puede referirse a si mismo y aparecer en una
-// propiedad. POP POP POP:
-type SomethingIterable<T> = T & { next: SomethingIterable<T> };
+// -- Recursividad en Interfaces --
+
+// -- Recursividad en Alias --
+
+// * Antes de la versión 3.7 de TS no se podía hacer recursividad
+// en la declaración de los Alias. Es decir, que la declaración del
+// alias se refiera a sí misma. 
+// Aunque aplicando la recursividad en interfaces si que podíamos hacer
+// cosas muy interesantes como esta:
+type IterableList<T> = T & { next: IterableList<T> };
 
 interface Student {
   name: string;
 }
 
-let myClass: SomethingIterable<Student>;
-myClass.name;
-myClass.next.name;
-myClass.next.next.name;
+let classList: IterableList<Student>;
+classList.name;
+classList.next.name;
+classList.next.next.name;
+
+// * A partir de la version 3.7 de TS ya si está soportada totalmente
+// la recursión con Alias. Esto abre un abanico de nuevas posibilidades.
 
 
 
@@ -180,8 +221,8 @@ myClass.next.next.name;
 // Muy útil para hacer que un tipo solo pueda tomar determinados
 // string literales como posibles valores, es decir, limitamos los
 // posible string que puede tomar como valores a un conjunto dado:
-type WorkDay = "monday" | "tuesday" | "wednesday" | "thursday" | "friday";
-const day: WorkDay = "sunday";  // "sunday" is not assignable.
+type LabourDay = "monday" | "tuesday" | "wednesday" | "thursday" | "friday";
+const day: LabourDay = "sunday";  // "sunday" is not assignable.
 
 
 

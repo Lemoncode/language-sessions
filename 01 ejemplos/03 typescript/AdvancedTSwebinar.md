@@ -3,17 +3,18 @@
 - [ ] [Opcional] Repaso rápido TS (15m).
 - [ ] [Opcional] Genéricos (15m)
 - Tipos Avanzado. (45m)
-  - [ ] Intersección de tipos.
-  - [ ] Union de tipos.
-  - [ ] Guardas.
+  - [x] Alias.
+  - [x] Intersección de tipos.
+  - [x] Union de tipos.
+  - [x] Guardas.
     - User defined guards: duck typing and type predicate.
     - Typeof guards.
     - Instanceof guards.
-  - [ ] Alias.
   - [ ] String & numeric literals.
   - [ ] Keyof.
   - [ ] Index & Mapped types.
   - [ ] Tipos condicionales.
+  - [ ] Recursividad.
 - Tipos de utilidad. (45m)
   - [x] Partial.
   - [x] Required.

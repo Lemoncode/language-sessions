@@ -1,11 +1,10 @@
 ///-- TIPOS GENÉRICOS DE UTILIDADES ************************************
 
-/**
- * Tipos que operan principalmente sobre interfaces y permiten realizar
- * cómodamente transformaciones de los mismos.
- *
- * A continuación, esquema copy/paste para presentar:
- */
+// Tipos que operan principalmente sobre interfaces y permiten realizar
+// cómodamente transformaciones de los mismos.
+
+
+// Esquema copy/paste para presentar:
 
 // *** X ***************
 
