@@ -225,13 +225,12 @@ interface Week {
 type Day = keyof Week;
 
 // -- Caso Práctico --
-const deleteProp = <T>(obj: T, ...keys: (keyof T)[]): void => {
-  keys.forEach(key => delete obj[key]);
-}
+const showProps = <T>(obj: T, ...keys: (keyof T)[]): void => {
+  keys.forEach(key => console.log(obj[key]));
+};
 
-const dev = { js: true, java: false, cplusplus: true };
-deleteProp(dev, "java", "cplusplus"); // Check intellisense!
-console.log(dev);
+const dev = { type: "frontend", languages: ["js", "css", "html"], senior: true };
+showProps(dev, "type", "languages"); // Check intellisense!;
 
 
 
