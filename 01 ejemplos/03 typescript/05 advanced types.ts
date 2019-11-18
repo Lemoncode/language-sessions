@@ -232,7 +232,50 @@ const showProps = <T>(obj: T, ...keys: (keyof T)[]): void => {
 const dev = { type: "frontend", languages: ["js", "css", "html"], senior: true };
 showProps(dev, "type", "languages"); // Check intellisense!;
 
+// TIPOS MAPEADOS (MAPPED TYPES)
 
+// Nos permiten crear nuevos alias a partir de las propiedades de otro alias.
+
+// Ejemplo:
+interface Product {
+  name: string;
+  price: number;
+}
+
+// El objeto resultante tendrá todas las propiedades de Obj
+// y valores funciones transformadoras
+type Evolver<Obj> = {
+  [Key in keyof Obj]?: (arg: Obj[Key]) => Obj[Key];
+}
+
+// Función que devolverá una nueva copia del objeto aplicando
+// las transformaciones en las propiedades
+const evolve = <Obj extends object>(transformations: Evolver<Obj>, obj: Obj): Obj => {
+  return Object.keys(obj).reduce<Obj>((result, key) => {
+    result[key] = key in transformations
+      ? transformations[key](obj[key])
+      : obj[key];
+    return result;
+  }, {} as Obj);
+}
+
+const product: Product = {
+  name: "  macbook Pro 16\" ",
+  price: 2638,
+};
+
+// Transformaciones:
+const formatString = (str: string) => (
+  str = str.trim(),
+  str[0].toUpperCase() + str.substr(0)
+)
+
+const applyIVA = (price: number): number => price * 1.21;
+
+// Aplicación
+const updatedProduct = evolve({ name: formatString, price: applyIVA }, product);
+
+console.log(updatedProduct);
 
 
 // TIPOS CONDICIONALES
