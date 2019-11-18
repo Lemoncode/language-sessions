@@ -14,7 +14,7 @@
   - [ ] Keyof.
   - [ ] Index & Mapped types.
   - [ ] Tipos condicionales.
-  - [ ] Recursividad.
+  - [x] Recursividad.
 - Tipos de utilidad. (45m)
   - [x] Partial.
   - [x] Required.

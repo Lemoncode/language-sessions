@@ -189,57 +189,30 @@ else console.log("Is String");
 
 
 
-// *** RECURSIVIDAD ***************
-
-// -- Recursividad en Interfaces --
-
-// -- Recursividad en Alias --
-
-// * Antes de la versión 3.7 de TS no se podía hacer recursividad
-// en la declaración de los Alias. Es decir, que la declaración del
-// alias se refiera a sí misma. 
-// Aunque aplicando la recursividad en interfaces si que podíamos hacer
-// cosas muy interesantes como esta:
-type IterableList<T> = T & { next: IterableList<T> };
-
-interface Student {
-  name: string;
-}
-
-let classList: IterableList<Student>;
-classList.name;
-classList.next.name;
-classList.next.next.name;
-
-// * A partir de la version 3.7 de TS ya si está soportada totalmente
-// la recursión con Alias. Esto abre un abanico de nuevas posibilidades.
-
-
-
-// STRING LITERALS
+// *** STRING & NUMERIC LITERALS ***************
 
 // Muy útil para hacer que un tipo solo pueda tomar determinados
-// string literales como posibles valores, es decir, limitamos los
-// posible string que puede tomar como valores a un conjunto dado:
+// valores literales, es decir, limitar el conjunto de posibles valores
+// a un subconjunto finito. Se emplea habitualmente junto con la unión:
+
+// -- Caso Práctico --
 type LabourDay = "monday" | "tuesday" | "wednesday" | "thursday" | "friday";
 const day: LabourDay = "sunday";  // "sunday" is not assignable.
 
-
-
-// NUMERIC LITERALS
-
-// Igual pero con números:
-
+// También es aplicable a números literales:
 const throwDice = (): 1 | 2 | 3 | 4 | 5 | 6 => {
   return 6; // Dado trucado MUAHAHAHAHA.
 }
 
 
 
-// KEYOF
+
+// *** KEYOF ***************
 
 // Operador muy util para extraer las propiedades de un interfaz como
 // posibles literales de un tipo concreto:
+
+// -- Caso Base --
 interface Week {
   monday: string;
   tuesday: string;
@@ -249,8 +222,16 @@ interface Week {
   saturday: string;
   sunday: string;
 }
+type Day = keyof Week;
 
-type WeedDay = keyof Week;
+// -- Caso Práctico --
+const deleteProp = <T>(obj: T, ...keys: (keyof T)[]): void => {
+  keys.forEach(key => delete obj[key]);
+}
+
+const dev = { js: true, java: false, cplusplus: true };
+deleteProp(dev, "java", "cplusplus"); // Check intellisense!
+console.log(dev);
 
 
 
@@ -270,3 +251,60 @@ type Palette<T extends Status> = T extends "sad" ?
   DarkColors : LightColors;
 
 const palette: Palette<"sad"> = "black";  // Only black or grey allowed.
+
+
+
+
+// *** RECURSIVIDAD ***************
+
+// -- Recursividad en Interfaces --
+
+// Podemos plantearnos el tipado de una estructura en árbol del siguiente
+// modo:
+interface TreeNode<T> {
+  value: T;
+  children?: Array<TreeNode<T>>;  // Colección opcional de más nodos (hijos)
+}
+
+const myTree: TreeNode<number> = {
+  value: 1,
+  children: [{ value: 2 }, { value: 3, children: [{ value: 4 }] }],
+};
+
+// -- Recursividad en Alias --
+
+// * Antes de la versión 3.7 de TS no se podía hacer recursividad
+// en la declaración de los Alias. Es decir, que la declaración del
+// alias se refiera a sí misma. De lo contrario nos daría un error
+// de referencia circular.
+
+// Aunque aplicando la recursividad en interfaces si que podíamos hacer
+// cosas muy interesantes como esta:
+type IterableList<T> = T & { next: IterableList<T> };
+
+interface Student {
+  name: string;
+}
+
+let classList: IterableList<Student>;
+classList.name;
+classList.next.name;
+classList.next.next.name;
+
+// También podríamos utilizar la técnica del "middleman" para burlar
+// esta limitación.
+// Yo habría querido poner lo siguiente:
+type TreeNodeError<T> = T | Array<TreeNodeError<T>>; // TS Error Circular Reference
+// Pero obtenemos un error => Podemos usar un "middleman" y desdoblar la
+// parte recursiva:
+interface TreeChildren<T> extends Array<TreeNodeMM<T>> { } // Middleman.
+type TreeNodeMM<T> = T | TreeChildren<T>;
+
+const myTreeMM: TreeNodeMM<string> = ["hello", [["world"], "!"]];
+
+
+// * A partir de la version 3.7 de TS ya si está soportada totalmente
+// la recursión con Alias. Esto abre un abanico de nuevas posibilidades.
+type TreeNodeR<T> = T | Array<TreeNodeR<T>>;
+
+const myTreeRecursive: TreeNodeR<boolean> = [true, [false, true, [false]]];
