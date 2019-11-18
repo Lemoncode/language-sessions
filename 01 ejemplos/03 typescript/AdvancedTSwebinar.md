@@ -10,8 +10,8 @@
     - User defined guards: duck typing and type predicate.
     - Typeof guards.
     - Instanceof guards.
-  - [ ] String & numeric literals.
-  - [ ] Keyof.
+  - [x] String & numeric literals.
+  - [x] Keyof.
   - [ ] Index & Mapped types.
   - [ ] Tipos condicionales.
   - [x] Recursividad.
