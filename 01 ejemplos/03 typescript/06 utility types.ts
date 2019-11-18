@@ -417,6 +417,7 @@ type MyNonNullable<T> = T extends null | undefined ? never : T;
 // PARAMETERS: Permite inferir el tipado de los argumentos de entrada de
 // una función en formato tupla.
 
+// -- Caso Base --
 const addTimestamp = (user: UserID, useLocale: boolean = false) => ({
   ...user,
   timestamp: useLocale ? Date().toLocaleString() : Date.now()
@@ -424,3 +425,18 @@ const addTimestamp = (user: UserID, useLocale: boolean = false) => ({
 
 type UserWithTimestamp = ReturnType<typeof addTimestamp>; // Check intellisense!
 type Params = Parameters<typeof addTimestamp>; // Check intellisense!
+
+// -- Caso Práctico --
+const delay = <F extends (...args: any[]) => any>(f: F, t: number) => (
+  ...args: Parameters<F>
+): Promise<ReturnType<F>> => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(f(...args)), t);
+  });
+};
+
+const shout = (text: string) => `${text.toUpperCase()}!!!`;
+console.log(shout("pim pam"));
+
+const delayedShout = delay(shout, 1000);  // Check intellisense over delayedShout
+delayedShout("toma lacasitos").then(message => console.log(message));
