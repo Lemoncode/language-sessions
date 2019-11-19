@@ -12,7 +12,7 @@
     - Instanceof guards.
   - [x] String & numeric literals.
   - [x] Keyof.
-  - [\] Index & Mapped types.
+  - [x] Index & Mapped types.
   - [x] Tipos condicionales.
   - [x] Recursividad.
 - Tipos de utilidad. (45m)
@@ -22,8 +22,8 @@
   - [x] Exclude.
   - [x] Extract.
   - [x] Pick.
-  - [X] Omit.
-  - [X] Record.
+  - [x] Omit.
+  - [x] Record.
   - [x] NonNullable.
   - [x] Return type.
   - [x] Parameters.

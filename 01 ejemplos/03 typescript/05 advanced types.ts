@@ -245,6 +245,8 @@ interface Product {
   price: number;
 }
 
+type ProducName = Product["name"];
+
 // El objeto resultante tendrá todas las propiedades de Obj
 // y valores funciones transformadoras
 type Evolver<Obj> = {
