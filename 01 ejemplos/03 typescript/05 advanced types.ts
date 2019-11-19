@@ -232,11 +232,14 @@ const showProps = <T>(obj: T, ...keys: (keyof T)[]): void => {
 const dev = { type: "frontend", languages: ["js", "css", "html"], senior: true };
 showProps(dev, "type", "languages"); // Check intellisense!;
 
-// TIPOS MAPEADOS (MAPPED TYPES)
+
+
+
+// *** TIPOS MAPEADOS (MAPPED TYPES) ***************
 
 // Nos permiten crear nuevos alias a partir de las propiedades de otro alias.
 
-// Ejemplo:
+// -- Caso Práctico --
 interface Product {
   name: string;
   price: number;
@@ -278,12 +281,14 @@ const updatedProduct = evolve({ name: formatString, price: applyIVA }, product);
 console.log(updatedProduct);
 
 
-// TIPOS CONDICIONALES
+
+
+// *** TIPOS CONDICIONALES ***************
 
 // Permite mapear a diferentes tipos comprobando el valor de otro.
 // En la practica es equivalente a poder usar ternarios para tipos.
-// Ejemplo:
 
+// -- Caso Práctico --
 type DarkColors = "black" | "grey";
 type LightColors = "white" | "yellow" | "pink";
 
