@@ -18,6 +18,51 @@
 
 
 
+// *** READONLY ***************
+
+// Convierte todas las propiedades de un interfaz en solo lectura:
+
+// -- Caso Base --
+interface State {
+  username: string;
+  password: string;
+}
+
+type ROState = Readonly<State>;
+
+// También aplicable a arrays:
+
+type ROArray<T> = Readonly<Array<T>>;
+// De hecho existe el tipo ReadonlyArray
+
+// -- Caso Práctico --
+// Un caso muy útil de Readonly se aplica para garantizar que una
+// implementación no va a mutar un objeto determinado. Así, el consumidor
+// de dicha implementación (una función por ejemplo) tiene garantías
+// de que los parámetros de entrada no serán mutados. Pongamos un
+// ejemplo con arrays, donde se ve más claro, aunque lo mismo serviría
+// para objetos:
+
+const sampleArray = [1, 2, 3];
+
+const tailMutable = <T>(array: T[]): T[] => (array.shift(), array);
+
+const tailImmutable = <T>(array: Readonly<T[]>): T[] => {
+  const [, ...tail] = array || [];
+  return tail;
+};
+
+console.log(sampleArray, tailMutable(sampleArray));
+console.log(sampleArray, tailImmutable(sampleArray));
+
+// -- Definición --
+type MyReadonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
+
+
+
 // *** PARTIAL ***************
 
 // Convierte en opcionales las propiedades de una interfaz, en la práctica
@@ -54,7 +99,6 @@ console.log(setState({ posts: 19, premium: true }));
 type MyPartial<T> = {
   [P in keyof T]?: T[P];
 };
-
 
 
 
@@ -101,52 +145,6 @@ console.log(p3d.getZ());
 // -- Definición --
 type MyRequired<T> = {
   [P in keyof T]-?: T[P];
-};
-
-
-
-
-
-// *** READONLY ***************
-
-// Convierte todas las propiedades de un interfaz en solo lectura:
-
-// -- Caso Base --
-interface State {
-  username: string;
-  password: string;
-}
-
-type ROState = Readonly<State>;
-
-// También aplicable a arrays:
-
-type ROArray<T> = Readonly<Array<T>>;
-// De hecho existe el tipo ReadonlyArray
-
-// -- Caso Práctico --
-// Un caso muy útil de Readonly se aplica para garantizar que una
-// implementación no va a mutar un objeto determinado. Así, el consumidor
-// de dicha implementación (una función por ejemplo) tiene garantías
-// de que los parámetros de entrada no serán mutados. Pongamos un
-// ejemplo con arrays, donde se ve más claro, aunque lo mismo serviría
-// para objetos:
-
-const sampleArray = [1, 2, 3];
-
-const tailMutable = <T>(array: T[]): T[] => (array.shift(), array);
-
-const tailImmutable = <T>(array: Readonly<T[]>): T[] => {
-  const [, ...tail] = array || [];
-  return tail;
-};
-
-console.log(sampleArray, tailMutable(sampleArray));
-console.log(sampleArray, tailImmutable(sampleArray));
-
-// -- Definición --
-type MyReadonly<T> = {
-  readonly [P in keyof T]: T[P];
 };
 
 
@@ -321,13 +319,14 @@ interface Inventoriable {
 type InventoryByName<T extends Inventoriable> = Record<T["name"], Omit<T, "name">>;
 type InventoryById<T extends Inventoriable> = Record<T["id"], Omit<T, "id">>;
 
-const pivotInventory = <T extends Inventoriable = Inventoriable>(
+const pivotInventory = <T extends Inventoriable>(
   list: InventoryByName<T>
 ): InventoryById<T> => {
-  return Object.entries<Omit<Inventoriable, "name">>(list).reduce((result, [name, product]) => {
-    result[product.id] = { name, ...omit(product, "id") };
-    return result;
-  }, {} as InventoryById<T>);
+  return Object.entries<Omit<Inventoriable, "name">>(list)
+    .reduce((result, [name, product]) => {
+      result[product.id] = { name, ...omit(product, "id") };
+      return result;
+    }, {} as InventoryById<T>);
 };
 
 interface Product extends Inventoriable {
@@ -427,7 +426,8 @@ type UserWithTimestamp = ReturnType<typeof addTimestamp>; // Check intellisense!
 type Params = Parameters<typeof addTimestamp>; // Check intellisense!
 
 // -- Caso Práctico --
-const delay = <F extends (...args: any[]) => any>(f: F, t: number) => (
+type GenericFunction = (...args: any[]) => any;
+const delay = <F extends GenericFunction>(f: F, t: number) => (
   ...args: Parameters<F>
 ): Promise<ReturnType<F>> => {
   return new Promise(resolve => {

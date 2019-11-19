@@ -1,29 +1,27 @@
 # Contenido
 
-- [ ] [Opcional] Repaso rápido TS (15m).
-- [ ] [Opcional] Genéricos (15m)
+- [ ] [Opcional] Genéricos (5m)
 - Tipos Avanzado. (45m)
-  - [x] Alias.
-  - [x] Intersección de tipos.
-  - [x] Union de tipos.
-  - [x] Guardas.
+  - [J] Alias.
+  - [J] Intersección.
+  - [S] Union.
+  - [S] Guardas.
     - User defined guards: duck typing and type predicate.
     - Typeof guards.
     - Instanceof guards.
-  - [x] String & numeric literals.
-  - [x] Keyof.
-  - [x] Index & Mapped types.
-  - [x] Tipos condicionales.
-  - [x] Recursividad.
+  - [J] String & Numeric literals.
+  - [J] Keyof.
+  - [S] Tipos mapeados.
+  - [S] Tipos condicionales.
+  - [J] Recursividad.
 - Tipos de utilidad. (45m)
-  - [x] Partial.
-  - [x] Required.
-  - [x] Readonly.
-  - [x] Exclude.
-  - [x] Extract.
-  - [x] Pick.
-  - [x] Omit.
-  - [x] Record.
-  - [x] NonNullable.
-  - [x] Return type.
-  - [x] Parameters.
+  - [J] Readonly.
+  - [S] Partial.
+  - [S] Required.
+  - [J] Exclude & Extract.
+  - [S] Pick & Omit.
+  - [J] Record.
+  - [S] NonNullable.
+  - [J] Function Helpers
+- Ejemplos Avanzados. (15m)
+  - [S] DeepGet

@@ -78,6 +78,8 @@ const saySomethingTyped = (message: string | number) => console.log(message);
 saySomethingTyped(true); // TS error: Argument of type 'true' is not assignable
 
 
+
+
 // *** GUARDAS ***************
 
 // La situación anterior, sin embargo, puede llevarnos a un escenario donde
@@ -240,12 +242,13 @@ showProps(dev, "type", "languages"); // Check intellisense!;
 // Nos permiten crear nuevos alias a partir de las propiedades de otro alias.
 
 // -- Caso Práctico --
-interface Product {
+interface ProductItem {
   name: string;
   price: number;
 }
 
-type ProducName = Product["name"];
+// Index type => Acceder al tipo de una propiedad en un interface:
+type ProducName = ProductItem["name"];
 
 // El objeto resultante tendrá todas las propiedades de Obj
 // y valores funciones transformadoras
@@ -264,7 +267,7 @@ const evolve = <Obj extends object>(transformations: Evolver<Obj>, obj: Obj): Ob
   }, {} as Obj);
 }
 
-const product: Product = {
+const product: ProductItem = {
   name: "  macbook Pro 16\" ",
   price: 2638,
 };
@@ -320,12 +323,7 @@ const myTree: TreeNode<number> = {
   children: [{ value: 2 }, { value: 3, children: [{ value: 4 }] }],
 };
 
-// -- Recursividad en Alias --
-
-// * Antes de la versión 3.7 de TS no se podía hacer recursividad
-// en la declaración de los Alias. Es decir, que la declaración del
-// alias se refiera a sí misma. De lo contrario nos daría un error
-// de referencia circular.
+// -- Recursividad en Alias con Interfaces --
 
 // Aunque aplicando la recursividad en interfaces si que podíamos hacer
 // cosas muy interesantes como esta:
@@ -340,12 +338,19 @@ classList.name;
 classList.next.name;
 classList.next.next.name;
 
-// También podríamos utilizar la técnica del "middleman" para burlar
-// esta limitación.
-// Yo habría querido poner lo siguiente:
+// -- Recursividad en Alias --
+
+// * Antes de la versión 3.7 de TS no se podía hacer recursividad
+// en la declaración de los Alias. Es decir, que la declaración del
+// alias se refiera a sí misma. De lo contrario nos daría un error
+// de referencia circular.
+
+// Por ejemplo, si queremos tipar nuestro árbol como:
 type TreeNodeError<T> = T | Array<TreeNodeError<T>>; // TS Error Circular Reference
-// Pero obtenemos un error => Podemos usar un "middleman" y desdoblar la
-// parte recursiva:
+// Obtenemos un error de referencia circular.
+
+// Para burlar esta limitación podemos usar una técnica conocida como
+// "middleman", con la que desdoblamos la parte recursiva y la extraemos:
 interface TreeChildren<T> extends Array<TreeNodeMM<T>> { } // Middleman.
 type TreeNodeMM<T> = T | TreeChildren<T>;
 
