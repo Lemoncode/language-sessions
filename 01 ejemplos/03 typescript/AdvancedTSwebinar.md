@@ -12,8 +12,8 @@
     - Instanceof guards.
   - [x] String & numeric literals.
   - [x] Keyof.
-  - [ ] Index & Mapped types.
-  - [ ] Tipos condicionales.
+  - [\] Index & Mapped types.
+  - [x] Tipos condicionales.
   - [x] Recursividad.
 - Tipos de utilidad. (45m)
   - [x] Partial.

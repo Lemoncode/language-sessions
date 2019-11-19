@@ -75,7 +75,7 @@ const saySomething = (message: any) => console.log(message);
 // Pero con la unión, restringimos el argumento a los tipos deseados:
 const saySomethingTyped = (message: string | number) => console.log(message);
 
-saySomethingTyped(true); // Argument of type 'true' is not assignable
+saySomethingTyped(true); // TS error: Argument of type 'true' is not assignable
 
 
 // *** GUARDAS ***************
@@ -120,8 +120,8 @@ const getRandomPerson = (): Man | Woman =>
 
 // ¿Cómo se que tengo un hombre o una mujer devueltos?
 const person = getRandomPerson();
-if (person.moustache) { }  // Intellisense error
-if (person.longHair) { } // Intellisese error
+if (person.moustache) { } // TS error: Property 'moustache' does not exist on type 'Woman'
+if (person.longHair) { } // TS error: Property 'longHair' does not exist on type 'Man'
 
 // [!] El acceso a estas propiedades causa un error porque tenemos
 // que DESAMBIGUAR el tipo. Para ello recurrimos a las GUARDAS.
@@ -197,7 +197,7 @@ else console.log("Is String");
 
 // -- Caso Práctico --
 type LabourDay = "monday" | "tuesday" | "wednesday" | "thursday" | "friday";
-const day: LabourDay = "sunday";  // "sunday" is not assignable.
+const day: LabourDay = "sunday";  // TS error: '"sunday"' is not assignable to type 'LabourDay'
 
 // También es aplicable a números literales:
 const throwDice = (): 1 | 2 | 3 | 4 | 5 | 6 => {
