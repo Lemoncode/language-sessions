@@ -1,4 +1,4 @@
-///-- EXPRESIONES BÁSICAS *******************************************************
+///-- EXPRESIONES BÁSICAS *************************************************
 
 // Asignación de valores a variables
 var a = 3;
@@ -18,9 +18,9 @@ var a = 5;
 
 
 
-///-- TIPOS DE DATOS *******************************************************
+///-- TIPOS DE DATOS ******************************************************
 
-// 6 tipos primitivos + Objetos
+// 7 tipos primitivos + Objetos
 
 
 // PRIMITIVOS
@@ -35,12 +35,12 @@ var a = 5;
 ""
 
 // number
-101     // entero positivo
--200    // entero negativo
-1220.31 // flotante
-1e6     // notación exponencial (1 x 10^6)
-Infinity // infinito
-NaN     // NotANumber (de hecho es de tipo número)
+101       // entero positivo
+  - 200      // entero negativo
+1220.31   // flotante
+1e6       // notación exponencial (1 x 10^6)
+Infinity  // infinito
+NaN       // NotANumber (de hecho es de tipo número)
 
 // boolean
 true
@@ -54,6 +54,10 @@ undefined
 
 // symbol
 // [!] Lo veremos en más adelante en el apartado ES6 and beyond
+
+// bigint
+// [!] Bajo Implementación ES2020. Nuevo tipo numérico para representar
+// enteros de cualquier tamaño, con cualquier precisión.
 
 
 // OBJETOS
@@ -144,28 +148,30 @@ console.log(3 <= 3); // true
 console.log(5 == 5); // true
 
 // [copy paste version]
-console.log(3 > 0); 
-console.log(3 < 0); 
-console.log(3 > 3); 
-console.log(3 < 3); 
-console.log(3 >= 3); 
-console.log(3 <= 3); 
-console.log(5 == 5); 
+console.log(3 > 0);
+console.log(3 < 0);
+console.log(3 > 3);
+console.log(3 < 3);
+console.log(3 >= 3);
+console.log(3 <= 3);
+console.log(5 == 5);
 
 
 
 // "TYPE COERCION"
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
-// Puesto que JS no es un lenguaje tipado, se puede comparar miembros de distinta naturaleza (distinto tipo). En tal
-// caso, la estrategia que sigue JS es convertir implicitamente uno de los miembros o los dos a un tipo común 
-// para poder realizar la comparativa. A esto se le llama "type coercion" o "conversión implícita/automática".
-console.log(5 == "5"); // true // [!] Loose equality. Igualdad débil. (Por type coertion, "5" string se convierte a 5 numero)
-console.log(5 === "5"); // false // [!] Strict equality. Igualdad fuerte.
-console.log(5 != 5); // false
-console.log(5 != "5"); // false. (Por type coercion, "5" string se convierte a 5 numero)
-console.log(5 !== 5); // false
-console.log(5 !== "5"); // true
-console.log(0 == false); // true. (Por type coercion, false se castea a 0)
+// Puesto que JS no es un lenguaje tipado, se puede comparar miembros de 
+// distinta naturaleza (distinto tipo). En tal caso, la estrategia que 
+// sigue JS es convertir implicitamente uno de los miembros o los dos a un 
+// tipo común para poder realizar la comparativa. A esto se le llama 
+// "type coercion" o "conversión implícita/automática".
+console.log(5 == "5");    // true // [!] Loose equality. Igualdad débil. (Por type coertion, "5" string se convierte a 5 numero)
+console.log(5 === "5");   // false // [!] Strict equality. Igualdad fuerte.
+console.log(5 != 5);      // false
+console.log(5 != "5");    // false. (Por type coercion, "5" string se convierte a 5 numero)
+console.log(5 !== 5);     // false
+console.log(5 !== "5");   // true
+console.log(0 == false);  // true. (Por type coercion, false se castea a 0)
 console.log(0 === false); // false. (number != boolean)
 
 // [copy paste version]
@@ -243,7 +249,6 @@ var a = 0 && 20;
 var a = Boolean(0 && 20);
 var a = 2 > 0 && "hello";
 var a = 2 < 0 && "hello";
-
 
 // 4. Operadores BITWISE u operadores de bits
 // No los daremos pero sabed que existen y que son poco frecuentes.
