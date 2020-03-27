@@ -225,7 +225,7 @@ var a = 3 || 20; // 3.
 0;
 NaN;
 false;
-("");
+"";
 null;
 undefined;
 // el resto de valores serán evaluados como "truthy values"
