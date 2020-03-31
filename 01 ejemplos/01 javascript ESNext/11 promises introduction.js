@@ -57,7 +57,7 @@ getDataAsync(console.log);  // Ejemplo de uso.
 // Una promesa puede tener los siguientes estados:
 // - A la espera de respuesta -> PENDING
 // - Operación completada con éxito -> FULFILLED or RESOLVED
-// - Operación con fallo o error -> REJECTED
+// - Operación rechazada con fallo o error -> REJECTED
 
 // Las promesas se basan en callbacks pero son una evolución de éstos, una
 // mejora, que añade azúcar sintáctico para un mejor manejo.
@@ -70,8 +70,8 @@ getDataAsync(console.log);  // Ejemplo de uso.
 // operación asíncrona se ha puesto en marcha y finalizará en algún momento,
 // ya sea con éxito o con fallo.
 // Una vez que tengamos el objeto promesa en nuestro poder, lo usamos para
-// registramos 2 de callbacks: uno para indicar 'que se debe hacer en caso 
-// de que todo vaya bien' (resolución de la promesa o resolve) y otro para 
+// registrar 2 callbacks: uno para indicar 'que se debe hacer en caso de
+// que todo vaya bien' (resolución de la promesa o resolve) y otro para 
 // indicar 'que hacer en caso de fallo' (rechazo de la promesa o reject).
 
 fetch("https://api.github.com/users/lemoncode")
@@ -79,7 +79,7 @@ fetch("https://api.github.com/users/lemoncode")
   .catch(error => console.error(error));
 
 
-// Anidando promesas. El resolveCallback de una promesa, podría devolver
+// Encadenando promesas. El resolveCallback de una promesa, podría devolver
 // otra promesa, en cuyo caso pueden encadenarse. Solo será necesario
 // especificar un rejectCallback (un único catch()) para cualquiera de las
 // promesas encadenadas.
@@ -95,7 +95,7 @@ fetch("https://api.github.com/users/lemoncode")
 // contenga la carga de la promesa, aquello que la promesa debe hacer.
 // Este callback nos provee de dos argumentos: resolveCallback y 
 // rejectCallback. Te suenan, ¿verdad? Son los dos mismos callbacks 
-// qeu se registrarán al consumir la promesa. De este modo, depende de ti  
+// que se registrarán al consumir la promesa. De este modo, depende de ti  
 // como desarrollador llamar a resolveCallback y rejectCallback cuando sea 
 // necesario para señalizar que la promesa ha sido completada con éxito 
 // o con fallo.
