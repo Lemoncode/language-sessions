@@ -39,7 +39,7 @@ console.log("No estoy bloqueada, puedo ejecutar código");
 // > No estoy bloqueada, puedo ejecutar código
 // > Hello World! con retardo
 
-// Podríamos hacer un mock a una llamada a servidor:
+// [OPCIONAL] Podríamos hacer un mock a una llamada a servidor:
 const serverData = 43;
 const getDataAsync = (callback) => {
   setTimeout(
@@ -103,13 +103,17 @@ fetch("https://api.github.com/users/lemoncode")
 // Modifiquemos el ejemplo anterior en el que haciamos un mock de llamada
 // a servidor para adaptarlo al patrón de promesas:
 const serverData = 43;
-const getDataAsync = () => {
+const getDataAsync = (callback) => {
+  setTimeout(
+    () => callback(serverData),   // callback del setTimeout
+    Math.random() * 1000 + 2000,  // Random entre 1s y 3s.
+  );
+};
+
+const getDataWithPromise = () => {
   return new Promise((resolve, reject) => {
     try {
-      setTimeout(
-        () => resolve(serverData),   // callback del setTimeout
-        Math.random() * 1000 + 2000,  // Random entre 1s y 3s.
-      );
+      getDataAsync(resolve);
       // throw new Error("Servidor no pudo procesar la petición"); // Probar el catch()
     } catch (e) {
       reject(e);
@@ -118,6 +122,36 @@ const getDataAsync = () => {
 };
 
 // Su utilización sería:
-getDataAsync()
+getDataWithPromise()
   .then(data => console.log(data))
   .catch(error => console.log(`ERROR CAPTURADO: ${error}`));
+
+
+// *** ASYNC / AWAIT [OPCIONAL SI DA TIEMPO]
+
+// Las promesas, al igual que los callbacks, pueden llegar a ser tediosas
+// cuando se anidan y se requieren más y más .then(). Async / Await son 2
+// palabras clave que surgieron para simpificar el manejo de las promesas.
+// Son azúcar sinctáctico para reducir el anidamiento y manejar código
+// asíncrono como si de código síncrono se tratara.
+
+const getDataWithSugar = async () => {
+  const data = await getDataWithPromise();
+  return data;
+}
+
+// Su utilización sería:
+getDataWithSugar()
+  .then(data => console.log(data))
+  .catch(error => console.log(`ERROR CAPTURADO: ${error}`));
+
+
+// Versión con manejo de errores:
+const getDataWithSugar = async () => {
+  try {
+    const data = await getDataWithPromise();
+    return data;
+  } catch (e) {
+    throw new Error(`ERROR LANZADO: ${e}`)
+  }
+}
