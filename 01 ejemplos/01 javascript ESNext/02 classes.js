@@ -9,7 +9,7 @@
 function Person(name) {
   this.name = name;
 }
-Person.prototype.greet = function() {
+Person.prototype.greet = function () {
   console.log("Hello, I'm " + this.name);
 };
 const antonio = new Person("Antonio");
@@ -18,7 +18,8 @@ antonio.greet(); // "Hello, I'm Antonio"
 // Una forma rápida de conseguir esto mismo en ES6 es usando la
 // palabra reservada "class".
 class Person {
-  constructor(name) { // Mi antigua función constructora
+  constructor(name) {
+    // Mi antigua función constructora
     this.name = name;
   }
 
@@ -33,7 +34,6 @@ antonio.greet(); // "Hello, I'm Antonio"
 console.log(typeof Person); // function!
 // No hay tipo "class" en JS. Una clase equivale a su función constructora.
 
-
 // HERENCIA
 
 // La herencia se aplica usando la palabra clave "extends".
@@ -45,13 +45,13 @@ function Automobile(wheels) {
   this.kms = 0;
 }
 
-Automobile.prototype.run = function (kms) {
+Automobile.prototype.drive = function (kms) {
   this.kms += kms;
-  console.log("I'm running " + kms + "kms");
+  console.log("Driving " + kms + "kms...");
 };
 
-Automobile.prototype.printKms = function () {
-  console.log("I ran " + this.kms + "kms");
+Automobile.prototype.showKms = function () {
+  console.log("Total Kms: " + this.kms);
 };
 
 function Taxi() {
@@ -61,28 +61,30 @@ function Taxi() {
 
 Taxi.prototype = Object.create(Automobile.prototype); // extends Automobile
 Taxi.prototype.constructor = Taxi;
-Taxi.prototype.moveSomeone = function () {
+Taxi.prototype.service = function () {
   this.isOccupied = true;
 };
 
 // super.run()
-Taxi.prototype.run = function (kms) {
-  Automobile.prototype.run.call(this, kms);
-  const movingMessage = this.isOccupied ? "moving someone" : "not moving no one";
-  console.log("And I'm " + movingMessage);
+Taxi.prototype.drive = function (kms) {
+  Automobile.prototype.drive.call(this, kms); // super.drive()
+  var serviceStatus = this.isOccupied ? "in service" : "free";
+  console.log("And I am " + serviceStatus);
 };
 
 // @override;
-Taxi.prototype.printKms = function () {
-  console.log("I ran " + this.kms + "kms and I could run another " + this.kms + "kms more.");
+Taxi.prototype.showKms = function () {
+  console.log("Taxi Total Kms: " + this.kms);
 };
 
 const taxi = new Taxi();
 console.log(taxi);
-console.log(taxi.run(100)); // "I'm running 100kms"
+taxi.drive(100); // "Driving 100kms... And I am free"
 console.log(taxi.isOccupied); // false
-taxi.moveSomeone();
+taxi.service();
 console.log(taxi.isOccupied); // true
+taxi.drive(50); // "Driving 50kms... And I am in service"
+taxi.showKms(); // "Taxi total Kms: 150"
 
 // Todo ese ejemplo sería equivalente a lo siguiente:
 class Automobile {
@@ -92,13 +94,13 @@ class Automobile {
   }
 
   // Estos métodos se añadirán al objeto Automobile.prototype.
-  run(kms) {
+  drive(kms) {
     this.kms += kms;
-    console.log("I'm running " + kms + "kms");
+    console.log("Driving " + kms + "kms...");
   }
 
-  printKms() {
-    console.log("I ran " + this.kms + "kms");
+  showKms() {
+    console.log("Total Kms: " + this.kms);
   }
 }
 
@@ -109,26 +111,28 @@ class Taxi extends Automobile {
   }
 
   // Estos métodos se añadirán al objeto Taxi.prototype.
-  moveSomeone() {
+  service() {
     this.isOccupied = true;
-  };
-
-  run(kms) {
-    super.run(kms);
-    const movingMessage = this.isOccupied ? "moving someone" : "not moving no one";
-    console.log("And I'm " + movingMessage);
   }
 
-  printKms() {
-    console.log("I ran " + this.kms + "kms and I could run another " + this.kms + "kms more.");
+  drive(kms) {
+    super.drive(kms);
+    var serviceStatus = this.isOccupied ? "in service" : "free";
+    console.log("And I am " + serviceStatus);
+  }
+
+  showKms() {
+    console.log("Taxi Total Kms: " + this.kms);
   }
 }
 const taxi = new Taxi();
 console.log(taxi);
-console.log(taxi.run(100)); // "I'm running 100kms"
+taxi.drive(100); // "Driving 100kms... And I am free"
 console.log(taxi.isOccupied); // false
-taxi.moveSomeone();
+taxi.service();
 console.log(taxi.isOccupied); // true
+taxi.drive(50); // "Driving 50kms... And I am in service"
+taxi.showKms(); // "Taxi total Kms: 150"
 
 // Las clases también pueden ser anónimas, al igual que las funciones.
 // Veamos un ejemplo de FACTORÍA DE CLASES.
@@ -139,7 +143,7 @@ function makeClass(message) {
     talk() {
       console.log(message);
     }
-  }
+  };
 }
 
 const Cat = makeClass("Meow!");
