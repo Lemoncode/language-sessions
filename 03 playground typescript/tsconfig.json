@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES2015"],
     "target": "es5",
     "module": "esnext",
     "watch": true,
@@ -7,8 +8,6 @@
     "outDir": "transpiled"
   },
   "compileOnSave": true,
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "include": ["src"]
 }
