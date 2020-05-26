@@ -248,7 +248,7 @@ interface ProductItem {
 }
 
 // Index type => Acceder al tipo de una propiedad en un interface:
-type ProducName = ProductItem["name"];
+type ProductName = ProductItem["name"];
 
 // El objeto resultante tendrá todas las propiedades de Obj
 // y valores funciones transformadoras
