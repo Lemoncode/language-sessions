@@ -44,7 +44,7 @@ const mim = new Witch('Madam Mim', new Sweep('Nimbus', 2000));
 // -- PUBLIC, PRIVATE, PROTECTED PROPERTIES
 // En TypeScript podemos añadir modificadores de acceso a las propiedades
 // utilizando "public", "private", y "protected". Por defecto las 
-// variables declaradas sin propiedades de acceso se consideran públicas.
+// variables declaradas sin modificadores de acceso se consideran públicas.
 
 type Hunger = 'low' | 'medium' | 'high' | 'full';
 class Undead {

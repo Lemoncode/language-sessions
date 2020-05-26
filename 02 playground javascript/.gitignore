@@ -1,10 +1,16 @@
-node_modules
+# Aux folders & files
+.vscode/
+.idea/
 .DS_Store
-yarn.lock
-package-lock.json
+desktop.ini
 *.log
 *.orig
 */src/**/*.js.map
-.idea/
-desktop.ini
+
+# NPM & Yarn
+node_modules
+yarn.lock
+package-lock.json
+
+# Output artifacts
 build/

@@ -49,8 +49,8 @@ const citizen: Citizen = {
 };
 
 // *** Propiedades Opcionales
-// TypeScript soporta tipos opcionales mediante el operador [?]. Una 
-// propiedad opciones no es más que aquella cuyo valor puede ser ser definido
+// TypeScript soporta propiedades opcionales mediante el operador [?]. Una 
+// propiedad opcional no es más que aquella cuyo valor puede ser ser definido
 // o no (en este segundo caso sería undefined).
 
 // Podemos definir propiedades opcionales de una interfaz
