@@ -228,7 +228,14 @@ console.log(userCommon);
 type MyExclude<T, U> = T extends U ? never : T;
 type MyExtract<T, U> = T extends U ? T : never;
 
+// -- Propuesta --
+// ¿Podríais hacer un DiffSymetrical? Es decir, que tome las propiedades de A
+// que no tiene B pero también las propiedades de B que no tiene A.
 
+// type DiffSym<A extends object = {}, B extends object = {}> = {
+//   [P in Exclude<keyof A, keyof B> | Exclude<keyof B, keyof A>]: P extends keyof A ? A[P]
+//   : P extends keyof B ? B[P] : never;
+// };
 
 
 // *** PICK & OMIT ***************
