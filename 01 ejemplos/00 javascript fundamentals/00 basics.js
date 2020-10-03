@@ -183,7 +183,6 @@ console.log(5 !== 5);
 console.log(5 !== "5");
 console.log(0 == false);
 console.log(0 === false);
-console.log(true + false);
 
 // Type coertion o casteo de tipos también se aplica a otros operadores
 console.log(true + false); // 1. (1 + 0)
@@ -195,6 +194,13 @@ console.log("num" - 3); // NaN. Porque convierte "num" (string) a NaN (número) 
 // ¿Pero y esto otro?
 console.log("" - 3); // -3. Porque convierte "" (string vacio) a 0 (número) y 0 - 3 = -3.
 
+// [copy paste version]
+console.log(true + false);
+console.log(true - false);
+console.log("num" + 3);
+console.log(3 + "num");
+console.log("num" - 3);
+console.log("" - 3);
 
 // 3. Operadores LÓGICOS
 
@@ -259,69 +265,62 @@ var a = 2 < 0 && "hello";
 
 ///-- DIRECTIVAS DE CONTROL *******************************************************
 
-// if
-if (3 > 0) {
-  console.log("greater");
+// if else
+
+// 1 sola rama
+var count = 0;
+if (count === 0) {
+  console.log("zero");
 }
 
-// if sin llaves, no necesarias
-if (3 > 0) console.log("greater");
-
-// else
-var user = "admin";
-if (user == "admin") {
-  console.log("Hello admin");
+// 2 ramas
+if (count === 0) {
+  console.log("zero");
 } else {
-  console.log("hello, user");
+  console.log("non-zero");
 }
 
-// else sin llaves, no necesarias (1 sola linea)
-var user = "admin"
-if (user == "admin") console.log("Hello admin");
-else console.log("hello, user");
-
-// else if
-var year = 2018;
-if (year < 2015) {
-  console.log("year is smaller than 2015");
-} else if (year > 2015) {
-  console.log("year is greater than 2018");
+// n ramas
+if (count === 0) {
+  console.log("zero");
+} else if (count === 1) {
+  console.log("one");
 } else {
-  console.log("year is exactly 2015");
+  console.log("more than one");
 }
 
-// else if sin llaves, no necesarias (1 sola linea)
-var year = 2018;
-if (year < 2015) console.log("year is smaller than 2015");
-else if (year > 2015) console.log("year is greater than 2018");
-else console.log("year is exactly 2015");
+// ¿1 sola línea en el cuerpo de las ramas? Se pueden eliminar los paréntesis
+if (count === 0) console.log("zero");
+else if (count === 1) console.log("one");
+else console.log("more than one");
+
 
 // switch
-var animal = "dog";
-switch (animal) {
-  case "bird":
-    console.log("It has wings.");
+var pet = "dog";
+switch (pet) {
+  case "cat":
+    console.log("medium pet");
     break;
   case "dog":
-    console.log("It has legs");
+    console.log("large pet");
     break;
-  case "dolphin":
-    console.log("It has fins");
+  case "bird":
+    console.log("small pet");
     break;
   default:
-    console.log("I don't know what it has");
+    console.log("unknown size");
 }
 
 // switch con reuso de casos
-var animal = "dog";
-switch (animal) {
+var pet = "dog";
+switch (pet) {
+  case "cat":
   case "dog":
-  case "dolphin":
-    console.log("Mammal");
+    console.log("mammal");
     break;
   case "bird":
   default:
-    console.log("Non-mammal");
+    console.log("non-mammal");
 }
 
 // operador ternario
@@ -332,12 +331,7 @@ var status = (age >= 18) ? "adult" : "minor";
 var status = age >= 18 ? "adult" : "minor";
 
 // anidamiento de ternarios "ternary nesting"
-var year = 2018;
-var result = (year === 2015) ?
-  "year is 2015" :
-  (year > 2015) ?
-    "year is greater than 2015" :
-    "year is smaller than 2015";
+var status = age >= 18 ? "adult" : (age >= 14 ? "teen" : "kid");
 
 // bucle "for"
 var limit = 10;
