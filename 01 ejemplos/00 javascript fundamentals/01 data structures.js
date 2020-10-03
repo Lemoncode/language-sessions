@@ -38,9 +38,9 @@ console.log(person["greet"]()); // logs "Hello!"; undefined
 for (var prop in person) {
   console.log(prop, person[prop]); // "21"        "twenty one"
 }                                  // "name"      "John"
-                                   // "greet"     function() { console.log("Hello!"); }
-                                   // "lastname"  "Smith"
-                                   // "country"   {id: 5, name: "Spain"}
+// "greet"     function() { console.log("Hello!"); }
+// "lastname"  "Smith"
+// "country"   {id: 5, name: "Spain"}
 
 
 // borrando propiedades
@@ -67,7 +67,7 @@ console.log(collection[3]); // undefined
 console.log(collection.length); // 3
 
 // un array puede contener cualquier tipo de elemento
-var mixedCollection = [1, 2, 3, "Go!", {object: true}];
+var mixedCollection = [1, 2, 3, "Go!", { object: true }];
 
 // equivalencia con un objeto:
 var collection = {
@@ -111,6 +111,8 @@ console.log([] == ''); // true (type coertion). [].toString() => "" == ''
 
 
 ///-- Constructores por defecto *******************************************************
+
+// [!] Tiene más sentido verlo tras la herencia prototípica.
 
 // String
 var a = new String('foo');
