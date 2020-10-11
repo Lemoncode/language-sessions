@@ -8,23 +8,26 @@ function shout(value) {
 shout("hi guys"); // "HI GUYS!!"
 
 
-// pero en JS podemos usar funciones antes de declararlas
+// Pero en JS podemos usar funciones antes de declararlas
 shout("hi guys"); // "HI GUYS!!"
 
 function shout(value) {
   console.log(value.toUpperCase() + "!!");
 }
 
-// a esto se le conoce como "hoisting": JS procesa las declaraciones antes que
-// cualquier otro código, lo que es equivalente en la práctica a colocar las
-// declaraciones arriba. Pero OJO, solo LAS DECLARACIONES.
+/*
+A esto se le conoce como "hoisting": JS procesa las declaraciones antes que
+cualquier otro código, lo que es equivalente en la práctica a colocar las
+declaraciones arriba. Pero OJO, solo LAS DECLARACIONES.
+*/
 
-// Veamos el caso de variables declaradas con var. Aparentemente esto debería
-// dar error
+// Veamos el caso de variables declaradas con var:
+// Aparentemente esto debería dar error
 console.log(a); // undefined
 var a = 5;
 console.log(a); // 5
-// sin embargo, gracias al "hoisting", a está declarada arriba del todo, aunque
+
+// Sin embargo, gracias al "hoisting", a está declarada arriba del todo, aunque
 // su asignación [!] ocurre en la segunda línea. Esto sería equivalente a:
 var a;
 console.log(a); // undefined
@@ -36,12 +39,14 @@ console.log(a); // 5
 
 ///-- VAR SCOPE *******************************************************
 
-// Cuando declaramos variables con var, su ámbito (scope) será el actual contexto
-// de ejecución: o bien una Función si ha sido declara dentro de ella, o bien el
-// contexto Global si está fuera.
+/*
+Cuando declaramos variables con var, su ámbito (scope) será el actual contexto
+de ejecución: o bien una Función si ha sido declara dentro de ella, o bien el
+contexto Global si está fuera.
 
-// Por lo tanto, los bloques "if/else" o bucles "for" no constitutyen un scope para
-// la declaración de variables var.
+Por lo tanto, los bloques "if/else" o bucles "for" no constitutyen un scope para
+la declaración de variables var.
+*/
 
 // "if/else" ejemplo
 if (true) {
@@ -70,7 +75,7 @@ for (var i = 0; i < collection.length; i++) {
 console.log(i); // 3
 console.log(message); // "Someone says: let's go"
 
-// equivalente a:
+// Equivalente a:
 var collection, message, i;
 collection = ["hey", "ho", "let's go"];
 message = "No one says nothing";
@@ -120,7 +125,8 @@ var print = function(message) {
   console.log(message);
 };
 
-// ¿Cual es mejor? Ninguno. Pero no se puede acceder a una "function expression" ANTES de su declaración
+// ¿Cual es mejor? Ninguno.
+// Pero no se puede acceder a una "function expression" ANTES de su declaración
 // debido al "hoisting":
 say("hello world"); // "Uncaught TypeError: say is not a function"
 
@@ -196,9 +202,10 @@ counter.print(); // 1
 counter.decrease();
 counter.print(); // 0
 
-// PREGUNTA. ¿A que nos recuerda esto? Pista: datos encapsulados, privados con una
-// interfaz para manejarlos ... tic ... tac .... CLASES!!! Se verán más adelante.
-
+/*
+PREGUNTA. ¿A que nos recuerda esto? Pista: datos encapsulados, privados con una
+interfaz para manejarlos ... tic ... tac .... CLASES!!! Se verán más adelante.
+*/
 
 
 ///-- IIFE (Immediately Invoked Function Expression) ******************

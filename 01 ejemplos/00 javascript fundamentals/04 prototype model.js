@@ -1,4 +1,4 @@
-///-- Modelo Prototípico *******************************************************
+///-- MODELO PROTOTÍPICO *******************************************************
 
 // JS no proporciona un modelo o implementación de clases en si mismo, sino que es
 // un lenguaje dinámico, basado en objetos, es decir, instancias en memoria.
@@ -203,7 +203,7 @@ console.log(taxi instanceof Object); // true
  *                                                                  Object.prototype._proto_: -----> null
  */
 
-//-- CREACIÓN DE OBJETOS Y SU CADENA DE PROTOTIPOS **************
+///-- CREACIÓN DE OBJETOS Y SU CADENA DE PROTOTIPOS **************
 
 // Hay 3 formas de crear objetos que difieren en la cadena de prototipos
 // que generan:
@@ -232,7 +232,43 @@ var a = { name: "a" }; // a -----> Object.prototype -----> null.
 var b = Object.create(a); // b -----> a -----> Object.prototype -----> null.
 var c = Object.create(b); // c -----> b -----> a -----> Object.prototype -----> null.
 
-//-- THIS *******************************************************
+
+///-- CONSTRUCTORES POR DEFECTO ***********************************
+
+// [!] Tiene más sentido verlo tras la herencia prototípica.
+
+// String
+var a = new String('foo');
+console.log(a); // "foo"
+console.log(a == "foo"); // true
+console.log(a === "foo"); // false
+
+// Number
+var a = new Number(32);
+console.log(a); // 32
+console.log(a == 32); // true
+console.log(a === 32); // false
+
+// Boolean
+var a = new Boolean(32);
+console.log(a); // true
+console.log(a == true); // true
+console.log(a === true); // false
+
+// Object
+var a = new Object();
+console.log(a); //{}
+console.log(a == {}); // false
+console.log(a === {}); // false
+
+// Type conversion
+console.log(32..toString()); // "32"
+console.log(Number("32")); // 32
+console.log(Boolean("32")); // true
+console.log(!!"32"); // true
+
+
+///-- THIS *******************************************************
 
 // "this" es especial en JS y no está atado a ninguna "class"
 function sayAge() {
