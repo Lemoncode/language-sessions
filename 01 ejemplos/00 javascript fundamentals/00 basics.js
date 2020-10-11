@@ -25,8 +25,10 @@ var a = 5;
 
 // PRIMITIVOS
 
-// Aquellos que trae el lenguaje por defecto. Un typo primitivo es aquel
-// que no es un objeto y por tanto no tiene métodos.
+/*
+Aquellos que trae el lenguaje por defecto. Un typo primitivo es aquel
+que no es un objeto y por tanto no tiene métodos.
+*/
 
 // string
 "hello world" // dobles comillas
@@ -36,7 +38,7 @@ var a = 5;
 
 // number
 101       // entero positivo
-  - 200      // entero negativo
+- 200     // entero negativo
 1220.31   // flotante
 1e6       // notación exponencial (1 x 10^6)
 Infinity  // infinito
@@ -53,17 +55,17 @@ null
 undefined
 
 // symbol
-// [!] Lo veremos en más adelante en el apartado ES6 and beyond
+/* [!] Lo veremos en más adelante en el apartado ES6 and beyond. */
 
 // bigint
-// [!] Bajo Implementación ES2020. Nuevo tipo numérico para representar
-// enteros de cualquier tamaño, con cualquier precisión.
+/* [!] Bajo Implementación ES2020. Nuevo tipo numérico para representar
+enteros de cualquier tamaño, con cualquier precisión. */
 
 
 // OBJETOS
 
 // object
-// [!] Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo
+/* [!] Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo. */
 
 // funciones (Son un tipo especial de objetos en JS)
 function main(arg) {
@@ -71,7 +73,7 @@ function main(arg) {
   return arg;
 }
 
-console.log(typeof main); // "function" Aunque en el fondo, es también un objeto, un objeto especial.
+console.log(typeof main); // "function" Aunque en el fondo, es también un objeto especial.
 
 
 
@@ -103,18 +105,18 @@ console.log(num++); // 3 (increases after console.log)
 console.log(num--); // 4 (decreases after console.log)
 console.log(++num); // 4 (increases before console.log)
 console.log(--num); // 3 (decreases before console.log)
-num += 5; // Equivalent to num = num + 5
-console.log(num); // 8
-num -= 5; // Equivalent to num = num - 5
-console.log(num); // 3
-num *= 10; // Equivalent to num = num * 10
-console.log(num); // 30
-num /= 6; // Equivalent to num = num / 6
-console.log(num); // 5
-num %= 3; // Equivalent to num = num % 3
-console.log(num); // 2
-num **= 10 // Equivalent to ten times num * num or Math.pow(2, 10)
-console.log(num) // 1024
+num += 5;           // Equivalent to num = num + 5
+console.log(num);   // 8
+num -= 5;           // Equivalent to num = num - 5
+console.log(num);   // 3
+num *= 10;          // Equivalent to num = num * 10
+console.log(num);   // 30
+num /= 6;           // Equivalent to num = num / 6
+console.log(num);   // 5
+num %= 3;           // Equivalent to num = num % 3
+console.log(num);   // 2
+num **= 10          // Equivalent to ten times num * num or Math.pow(2, 10)
+console.log(num)    // 1024
 
 // [copy paste version]
 var num = 3;
@@ -139,13 +141,13 @@ console.log(num);
 // 2. Operadores de COMPARACIÓN
 // Mayor que, menor que, igualdad, desigualdad
 
-console.log(3 > 0); // true
-console.log(3 < 0); // false
-console.log(3 > 3); // false
-console.log(3 < 3); // false
-console.log(3 >= 3); // true
-console.log(3 <= 3); // true
-console.log(5 == 5); // true
+console.log(3 > 0);   // true
+console.log(3 < 0);   // false
+console.log(3 > 3);   // false
+console.log(3 < 3);   // false
+console.log(3 >= 3);  // true
+console.log(3 <= 3);  // true
+console.log(5 == 5);  // true
 
 // [copy paste version]
 console.log(3 > 0);
@@ -159,12 +161,14 @@ console.log(5 == 5);
 
 
 // "TYPE COERCION"
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
-// Puesto que JS no es un lenguaje tipado, se puede comparar miembros de 
-// distinta naturaleza (distinto tipo). En tal caso, la estrategia que 
-// sigue JS es convertir implicitamente uno de los miembros o los dos a un 
-// tipo común para poder realizar la comparativa. A esto se le llama 
-// "type coercion" o "conversión implícita/automática".
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
+Puesto que JS no es un lenguaje tipado, se puede comparar miembros de 
+distinta naturaleza (distinto tipo). En tal caso, la estrategia que 
+sigue JS es convertir implicitamente uno de los miembros o los dos a un 
+tipo común para poder realizar la comparativa. A esto se le llama 
+"type coercion" o "conversión implícita/automática".
+*/
 console.log(5 == "5");    // true // [!] Loose equality. Igualdad débil. (Por type coertion, "5" string se convierte a 5 numero)
 console.log(5 === "5");   // false // [!] Strict equality. Igualdad fuerte.
 console.log(5 != 5);      // false
@@ -205,29 +209,33 @@ console.log("" - 3);
 // 3. Operadores LÓGICOS
 
 // && AND
-console.log(true && true); // true
-console.log(true && false); // false
-console.log(false && true); // false
-console.log(false && false); // false
+console.log(true && true);    // true
+console.log(true && false);   // false
+console.log(false && true);   // false
+console.log(false && false);  // false
 
 // || OR
-console.log(true || true); // true
-console.log(true || false); // true
-console.log(false || true); // true
-console.log(false || false); // false
+console.log(true || true);    // true
+console.log(true || false);   // true
+console.log(false || true);   // true
+console.log(false || false);  // false
 
-// IMPORTANTE. De nuevo, JS puede tener operandos de distinta naturaleza.
-// Los operadores && y ||, cuando se usan con operandos no booleanos
-// pueden devolver un resultado no booleano, cualquiera: array, objeto ...
+/*
+IMPORTANTE. De nuevo, JS puede tener operandos de distinta naturaleza.
+Los operadores && y ||, cuando se usan con operandos no booleanos
+pueden devolver un resultado no booleano, cualquiera: array, objeto ...
+*/
 
 // Por ejemplo:
 var a = 3 || 20; // 3.
 
-// Para saber que operando se devuelve, JS tiene que evaluarlos como booleanos
-// ya que los operadores lógicos trabajan con operandos booleanos.
-// En JavaScript, al convertir o evaluar cualquier valor como booleano, pueden suceder
-// 2 cosas, que nos de true o que nos de false. A los valores que nos dan false se le
-// conocen como "falsy values" y son sólamente estos:
+/*
+Para saber que operando se devuelve, JS tiene que evaluarlos como booleanos
+ya que los operadores lógicos trabajan con operandos booleanos.
+En JavaScript, al convertir o evaluar cualquier valor como booleano, pueden suceder
+2 cosas, que nos de true o que nos de false. A los valores que nos dan false se le
+conocen como "falsy values" y son sólamente estos:
+*/
 0;
 NaN;
 false;
@@ -257,9 +265,11 @@ var a = 2 > 0 && "hello";
 var a = 2 < 0 && "hello";
 
 // 4. Operadores BITWISE u operadores de bits
-// No los daremos pero sabed que existen y que son poco frecuentes.
-// Suelen ser utilizados en implementaciones de algoritmos más "a bajo nivel"
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise
+/*
+No los daremos pero sabed que existen y que son poco frecuentes.
+Suelen ser utilizados en implementaciones de algoritmos más "a bajo nivel"
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise
+*/
 
 
 
