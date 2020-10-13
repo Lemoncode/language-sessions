@@ -94,16 +94,16 @@ console.log(nobody); // undefined
 // el array a variables de forma directa, en una línea:
 // [!] El orden en la asignación se mantiene
 const students = ["Alan", "Evan", "Ana"];
-const [alan, evan, ana, nobody] = students;
-console.log(alan); // "Alan"
-console.log(evan); // "Evan"
-console.log(ana); // "Ana"
-console.log(nobody); // undefined
+const [first, second, third, fourth] = students;
+console.log(first); // "Alan"
+console.log(second); // "Evan"
+console.log(third); // "Ana"
+console.log(fourth); // undefined
 
 // Podemos omitir elementos intermedios usando la coma (,)
 const students = ["Alan", "Evan", "Ana"];
-const [, , ana] = students;
-console.log(ana); // "Ana"
+const [, , third] = students;
+console.log(third); // "Ana"
 
 // Se puede aplicar "destructuring" sobre arrays pasados como
 // argumento de una función:

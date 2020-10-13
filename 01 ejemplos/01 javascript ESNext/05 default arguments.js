@@ -11,9 +11,7 @@ console.log(greet(undefined)); // "Hello, Unknown"
 console.log(greet(null)); // "Hello, null"
 
 // Se pueden aplicar valores por defecto a variables asignadas por destructuring
-function getName({name = "Unknown"}) {
-  console.log(name);
-}
+const getName = ({name = "Unknown"}) => console.log(name);
 getName({age: 24}); // "Unknown"
 getName({name: "Carl"}); // "Carl"
 getName({}) // "Unknown"
@@ -25,9 +23,7 @@ getName(); // [!] Si no inicializamos el parametro a {} esto daría TypeError.
 
 // Para evitar esos errores tenemos que inicializar también el argumento completo
 // como objeto vacío, no solo su propiedad name.
-function getName({name = "Unknown"} = {}) {
-  console.log(name);
-}
+const getName = ({name = "Unknown"} = {}) => console.log(name);
 
 getName(); // Unknown. Ahora si!
 
@@ -37,9 +33,7 @@ getName(); // Unknown. Ahora si!
 getName(null); // [!] Uncaught TypeError.
 
 // Ejemplo con arrays:
-function sumDice([d1 = 0, d2 = 0] = []) {
-  return d1 + d2;
-}
+const sumDice = ([d1 = 0, d2 = 0] = []) => d1 + d2;
 console.log(sumDice()); // 0
 console.log(sumDice([])); // 0
 console.log(sumDice([3])); // 3
