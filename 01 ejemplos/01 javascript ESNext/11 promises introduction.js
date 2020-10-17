@@ -101,7 +101,7 @@ fetch("https://api.github.com/users/lemoncode")
 const getDataAsync = (callback) => {
   setTimeout(
     () => callback(Math.ceil(Math.random() * 100)), // callback del setTimeout
-    Math.random() * 1000 + 2000 // Random entre 1s y 3s.
+    Math.random() * 2000 + 1000 // Random entre 1s y 3s.
   );
 };
 
