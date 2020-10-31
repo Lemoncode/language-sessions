@@ -231,7 +231,11 @@ const showProps = <T>(obj: T, ...keys: (keyof T)[]): void => {
   keys.forEach(key => console.log(obj[key]));
 };
 
-const dev = { type: "frontend", languages: ["js", "css", "html"], senior: true };
+const dev = {
+  type: "frontend",
+  languages: ["js", "css", "html"],
+  senior: true,
+};
 showProps(dev, "type", "languages"); // Check intellisense!;
 
 
@@ -299,7 +303,7 @@ type LightColors = "white" | "yellow" | "pink";
 
 type Status = "sad" | "happy";
 
-type Palette<T extends Status> = T extends "sad" ?
+type Palette<P extends Status> = P extends "sad" ?
   DarkColors : LightColors;
 
 const palette: Palette<"sad"> = "black";  // Only black or grey allowed.
