@@ -23,6 +23,8 @@ interface Profile {
     likes: number;
     rt: number;
   };
+  friends?: string[];
+  greet?: () => void;
 }
 
 const CreateProfile = (): Profile => ({
@@ -32,18 +34,24 @@ const CreateProfile = (): Profile => ({
     rt: 4,
     likes: 15, // Suponer que es 0 también para el null coalescing.
   },
+  // friends: ["Santi", "Ana"],
+  // greet: () => console.log("Hey there! Whats up");
 });
 
 const myProfile = CreateProfile();
 
-// -- Optional Chaining --
+// ***  Optional Chaining
 // Supongamos que address no existe en nuestro "myProfiles".
 // console.log(myProfile.address.num); // Poco robusto, candidato a petar.
 console.log(myProfile && myProfile.stats && myProfile.stats.likes); // Chequeos inline, engorroso
-console.log(myProfile ?.stats ?.likes || "Not Available"); // Optional chaining, más elegante.
+console.log(myProfile?.stats?.likes || "Not Available"); // Optional chaining, más elegante.
 
-// -- Null Coalescing --
+// El optional chaining también se puede aplicar con arrays y funciones.
+console.log(myProfile?.friends?.[0]);
+console.log(myProfile?.greet?.());
+
+// *** Null Coalescing
 // Supongamos que likes=0, problema, es un falsy value. En la linea anterior
 // habría devuelto "Not Available". Con null coalescing evaluamos si es
 // null o undefined solamente.
-console.log(myProfile ?.stats ?.likes ?? "Not Available");
+console.log(myProfile?.stats?.likes ?? "Not Available");

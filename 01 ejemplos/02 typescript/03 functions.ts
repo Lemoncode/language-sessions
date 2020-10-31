@@ -87,7 +87,6 @@ const r3 = switchType({}); // [ts] Argument of type '{}' is not assignable to pa
 // interfaces para diseñar funciones.
 interface RepeatString {
   (value: string, times: number): string;
-  times: number;
 }
 
 const repeatString: RepeatString = (value, times) => Array(times).fill(value).join(" ");
