@@ -1,5 +1,10 @@
 ///-- OBJETOS *******************************************************
 
+/*
+Datos estructurados siguiendo el formato clave-valor. A cada clave o 
+alia lo llamamos propiedad.
+*/
+
 // Inicialización de objetos de forma literal, "object literals"
 var person = { name: "John" }; // {} => inicializador de objetos
 
@@ -57,6 +62,11 @@ console.log(boy.toString()); // [object Object]
 
 
 ///-- ARRAYS *******************************************************
+
+/*
+Datos estructurados siguiendo un orden. Cada dato se identifica con un índice
+que indica su posición dentro de la estructura.
+*/
 
 // Inicialización de arrays de forma literal.
 var collection = ["hey", "ho", "let's go"]; // [] => Inicializador de arrays

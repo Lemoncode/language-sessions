@@ -16,18 +16,36 @@ var d = 4;
 */
 var a = 5;
 
-
+/*
+NOTA:
+Javascript es un lenguaje dinámico y débilmente tipado, lo que significa que
+las variables no están asociadas a ningún tipo concreto. Por tanto, no tengo
+que declararlas especificando ningún tipo. Puedo asignar el valor que quiera,
+del tipo que quiera.
+*/
 
 ///-- TIPOS DE DATOS ******************************************************
 
-// 7 tipos primitivos + Objetos
+/*
+Distinguimos 2 grandes grupos en Javascript:
+- Tipos PRIMITIVOS (representan un único dato simple).
+- Tipos estructurales (representan estructuras de datos) u OBJETOS.
+
+7 PRIMITIVOS (2 de nueva incorporación) + OBJETOS
+*/
 
 
 // PRIMITIVOS
 
 /*
-Aquellos que trae el lenguaje por defecto. Un typo primitivo es aquel
-que no es un objeto y por tanto no tiene métodos.
+DEFINICIÓN:
+Aquellos que trae el lenguaje por defecto (built-in). Un tipo primitivo es aquel
+que no es un objeto y por tanto no tiene métodos. Representan datos simples, sencillos.
+
+CARACTERÍSTICAS:
+- Todos los primitivos son inmutables. Una vez creado un valor primitivo no puede ser
+alterado ni modificado (no confundir con reasignar una variable con otro valor).
+- Operador 'typeof'
 */
 
 // string
@@ -38,17 +56,22 @@ que no es un objeto y por tanto no tiene métodos.
 
 // number
 101       // entero positivo
-- 200     // entero negativo
+-200      // entero negativo
 1220.31   // flotante
 1e6       // notación exponencial (1 x 10^6)
 Infinity  // infinito
-NaN       // NotANumber (de hecho es de tipo número)
+NaN       // NotANumber** (de hecho es de tipo número)
+/*
+** Indeterminados (0*Infinito), indefinidos (1/0), fuera del conjunto de los
+reales (sqrt(-1)), o errores al parsear (parseInt("abc"))
+*/ 
 
 // boolean
 true
 false
 
 // null
+/* [!] Primitivo especial de tipo "object". Raiz de la cadena de prototipos */
 null
 
 // undefined
@@ -61,11 +84,24 @@ undefined
 /* [!] Bajo Implementación ES2020. Nuevo tipo numérico para representar
 enteros de cualquier tamaño, con cualquier precisión. */
 
+// operador typeof para primitivos
+console.log(typeof "");         // string
+console.log(typeof 0);          // number
+console.log(typeof false);      // boolean
+console.log(typeof undefined);  // undefined
+console.log(typeof null);       // object** Se entenderá mejor con el modelo prototípico
+
 
 // OBJETOS
 
+/*
+Se utilizan para representar datos estructurados, como los objetos en si mismos o
+los arrays (que también son objetos en el fondo)
+
+[!] Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo.
+*/
+
 // object
-/* [!] Los objetos y estructuras de datos (arrays) se darán en el siguiente capítulo. */
 
 // funciones (Son un tipo especial de objetos en JS)
 function main(arg) {
