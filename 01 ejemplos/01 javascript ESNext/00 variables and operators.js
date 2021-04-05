@@ -1,4 +1,4 @@
-///-- LET/CONST *******************************************************
+///-- VARIABLES LET/CONST *****************************************************
 
 // "let" y "const" son 2 nuevas palabras reservadas en ES6 para declarar
 // variables. Presentan una notable diferencia con respecto a "var",
@@ -106,3 +106,26 @@ console.log(checkAccess("user")); // "You're not authorized"
 
 
 // [!] A partir de ahora OLVIDAOS DE VAR :P :)
+
+
+///-- OPERADORES *******************************************************
+
+// *** Optional chaining. [!] Bajo implementación ES2020.
+
+Pending
+
+// *** Null coalescing. [!] Bajo implementación ES2020.
+
+Pending
+
+// *** Asignaciones con operadores lógicos. [!] Bajo implementación ES2022.
+var a = true;
+a &&= false;    // a = a && false
+console.log(a); // false
+a ||= true;     // a = a && true
+console.log(a); // true
+
+// *** Asignaciones con operador null coalescing. [!] Bajo implementación ES2022.
+var a = null;
+a ??= false;    // a = a ?? false
+console.log(a); // false
