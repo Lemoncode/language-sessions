@@ -173,10 +173,10 @@ function createCounter() {
   };
 }
 
-var printCounter = createCounter();
-printCounter(); // 0
-printCounter(); // 1
-printCounter(); // 2
+var counter = createCounter();
+counter(); // 0
+counter(); // 1
+counter(); // 2
 console.log(i); // "Uncaught ReferenceError: i is not defined"
 
 // [!!!] Los CLOSURES son muy útiles para encapsular datos, hacerlos privados.
@@ -222,14 +222,14 @@ interfaz para manejarlos ... tic ... tac .... CLASES!!! Se verán más adelante.
 
 // Podemos encerrar una función dentro de un IIFE.
 // Hagámoslo con el ejemplo anterior:
-var printCounter = (function createCounter() {
+var counter = (function createCounter() {
   var i = 0;
   return function () {
     console.log(i++);
   };
 })();
 
-printCounter(); // 0
-printCounter(); // 1
-printCounter(); // 2
+counter(); // 0
+counter(); // 1
+counter(); // 2
 console.log(i); // "Uncaught ReferenceError: i is not defined"

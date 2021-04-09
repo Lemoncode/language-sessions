@@ -222,7 +222,7 @@ console.log(taxi instanceof Automobile); // true
 console.log(taxi instanceof Object); // true
 
 /*
-Herencia
+Herencia simulada via cadena de prototipos
 Taxi -----> Automobile -----> Object -----> null
 
 Cadena Prototípica
@@ -339,7 +339,7 @@ al que llama (caller), ahora si funciona.
 */
 
 // De forma equivalente:
-const me = {
+var me = {
   name: "Javi",
   age: "36",
 };

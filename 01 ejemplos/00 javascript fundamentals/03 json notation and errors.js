@@ -44,7 +44,7 @@ console.log(parsedProduct); // {id: 13, name: "Note 9", type:"phone"}
 
 // Si el objeto está malformado lanzará un error:
 JSON.parse('{"id":13,"name":"Note 9",`type`:"phone"}'); // Uncaught SyntaxError: Unexpected token ` in JSON at position 25
-//                               backticks ~~~~~~~~~~^~~~~^
+//               backticks ~~~~~~~~~~^~~~~^
 
 
 ///-- ERRORES *******************************************************

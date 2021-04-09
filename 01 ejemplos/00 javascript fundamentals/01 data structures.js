@@ -2,7 +2,7 @@
 
 /*
 Datos estructurados siguiendo el formato clave-valor. A cada clave o 
-alia lo llamamos propiedad.
+alias lo llamamos propiedad.
 */
 
 // Inicialización de objetos de forma literal, "object literals"
@@ -35,8 +35,8 @@ console.log(person.country); // { id: 5, name: "Spain" }
 // Y también pueden ser funciones
 person.greet = function () { console.log("Hello!"); };
 console.log(person.greet); // function() { console.log("Hello!"); }
-console.log(person.greet()); // logs "Hello!"; undefined
-console.log(person["greet"]()); // logs "Hello!"; undefined
+person.greet(); // logs "Hello!"
+person["greet"](); // logs "Hello!"
 
 // Iterando por las propiedades
 /* [!] Used order === first assigned, first shown. */
