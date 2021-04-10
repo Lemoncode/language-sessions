@@ -7,8 +7,8 @@
 // "undefined" y en caso de no serlo devolverán el valor de la propiedad a la
 // que estamos atacando.
 
-// NULL COALESCING
-// A partir de la versión 3.7 TypeScript añade soporte de Null Coalescing.
+// NULLISH COALESCING
+// A partir de la versión 3.7 TypeScript añade soporte de Nullish Coalescing.
 // Esto nos permite utilizar el operador '??', que funciona de manera similar
 // al operador "||" pero sólo devuelve el segundo operando si el primero
 // es "null" o "undefined" en vez de "falsy values"
@@ -50,8 +50,8 @@ console.log(myProfile?.stats?.likes || "Not Available"); // Optional chaining, m
 console.log(myProfile?.friends?.[0]);
 console.log(myProfile?.greet?.());
 
-// *** Null Coalescing
+// *** Nullish Coalescing
 // Supongamos que likes=0, problema, es un falsy value. En la linea anterior
-// habría devuelto "Not Available". Con null coalescing evaluamos si es
+// habría devuelto "Not Available". Con nullish coalescing evaluamos si es
 // null o undefined solamente.
 console.log(myProfile?.stats?.likes ?? "Not Available");
