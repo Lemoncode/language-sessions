@@ -165,7 +165,7 @@ const Person = (name) => {
 
 const dan = new Person("Dan"); // Uncaught TypeError: Person is not a constructor
 
-// 3. Y tampoco tienen propiedad "prototype"
+// 3. Y tampoco tienen propiedad "prototype" puesto que no puede ser constructoras.
 const Person = (name) => {
   this.name = name;
 };
