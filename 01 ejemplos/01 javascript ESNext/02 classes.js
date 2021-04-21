@@ -135,7 +135,8 @@ taxi.drive(50); // "Driving 50kms... And I am in service"
 taxi.showKms(); // "Taxi total Kms: 150"
 
 // Las clases también pueden ser anónimas, al igual que las funciones.
-// Veamos un ejemplo de FACTORÍA DE CLASES.
+// Veamos un ejemplo de FACTORÍA DE CLASES. Usaremos una clase como ciudadano
+// de primer orden (puesto que es una función): a esto se le llama 'class expression'.
 // Aqui estamos usando el concepto de CLOSURE para 'recordar' el mensaje
 // y crear clases especializadas (distintas) con distinto mensaje.
 function makeClass(message) {
